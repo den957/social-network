@@ -1,0 +1,43 @@
+.addPost__form {
+   width:100%;
+}
+.addPost__textarea {
+   width:100%;
+   height:0px;
+   overflow:hidden;
+   resize: none;
+   padding:0.4em 2em 0em 0.5em;
+   font-size: 0.9rem;
+
+}
+.addPost__button {
+   display: block;
+   float:right;
+   padding:0.4em 1.6em;
+   background-color: #5181b8;
+   color:white;
+   border-radius: 0.2em;
+   font-size: 0.9rem;
+}
+.addPost__button:hover {
+   background-color: #5f8dc1;
+}
+.addPost__input {
+   width:100%;
+   height:100%;
+   font-size: 0.9rem;
+   padding-left:0.5em ;
+}
+.addPost__close {
+   position: absolute;
+   top:0.5em;right:1.1em;
+   width: 0.3em;
+   height:0.3em;
+   display: block;
+   color: grey;
+   font-size: 1rem;
+}
+.addPost__close:hover {
+   color: #A0A0A0;
+   cursor: pointer;
+}

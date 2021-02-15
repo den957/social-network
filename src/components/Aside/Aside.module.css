@@ -1,0 +1,34 @@
+.aside__item {
+   display: block;
+   position: relative;
+   border-radius: 0.2em;
+}
+.aside__item:hover {
+   background-color: #c1c1c1;
+}
+.aside__icon {
+   position: absolute;
+   top:0.3em;
+   font-size:1.2rem;
+   color:#789cc6;
+}
+.aside__name {
+   display: block;
+   margin-left: 2.5em;
+   color:black;
+   font-weight: 100;
+   font-size: 1rem;
+   padding: 0.4em;
+}
+.iconAside__profile {
+   left:0.9em;
+}
+.iconAside__messages {
+   left:0.8em;
+}
+.iconAside__users {
+   left:0.7em;
+}
+.iconAside__settings {
+   left:0.7em;
+}

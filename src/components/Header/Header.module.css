@@ -1,0 +1,141 @@
+/*---HEADER---*/
+.header {
+   position: relative;
+   top:0;left:0;
+   width:100%;
+   background-color: white;
+   border:1px solid #d3d9de;
+   border-top:none;
+   margin-bottom:0.7em;
+}
+.header__container {
+   position: relative;
+   width:75%;
+   margin:0 auto;
+ }
+ @media (max-width: 768px) {
+   .header__container {
+     width:100%;
+   }
+ }
+ .header__row {
+    display: flex;
+ }
+ .header__logo {
+   align-self: center;
+   flex:1 1 auto;
+ }
+ .logoHeader__row {
+    display: flex;
+ }
+ .logoHeader__img {
+   width:2.8em;
+   height:2.8em;
+   margin-right: 0.3em;
+ }
+ .logoHeader__img > img {
+   width:100%;
+   height:100%;
+   border-radius:50%;
+   object-fit: cover;
+}
+.logoHeader__name {
+   align-self: center;
+   font-size: 1rem;
+   font-weight: 700;
+}
+
+ .header__body {
+   flex: 0 1 auto;
+ }
+ .bodyHeader {
+   display: inline-block;
+   padding:0.5em 0.6em;
+ }
+ .bodyHeader:hover {
+   background-color:  #e8e7e5;
+   cursor: pointer;
+ }
+ .bodyHeader__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ }
+ .bodyHeader__fullName {
+   font-size: 1rem;
+   margin-left: 0em;
+ }
+ .bodyHeader__logo {
+   width:1.8em;
+   height:1.8em;
+   margin-left: 0.5em;
+ }
+ .bodyHeader__logo > img {
+   width:100%;
+   height:100%;
+   border-radius:50%;
+   object-fit: cover;
+}
+.bodyHeader__arrow {
+   color: gray;
+   font-size: 1rem;
+   margin-left: 0.5em;
+}
+ .loginHeader__link {
+   display: inline-block;
+   padding:0.85em 1.3em;
+   color: #5181b8;
+   font-size: 1rem;
+   font-weight: 700;
+   margin:auto;
+ }
+ .loginHeader__link:hover {
+    background-color:  #e8e7e5;
+ }
+
+/*---MODAL_HEADER---*/
+.header__modal {
+   position: absolute;
+   top:2.8em;right:0;
+   width:10em;
+   background-color: white;
+   border:1px solid #d3d9de;
+   border-radius: 0em 0em 0.2em 0.2em;
+   padding: 0.2em 0em;
+   z-index: 1;
+}
+.modalHeader__item {
+   color:#2a5885;
+   font-weight: 100;
+   font-size: 0.6rem;
+   margin-bottom: 0.3em;
+}
+.modalHeader__link {
+   display: block;
+   padding: 0.4em 1em;
+   color:#2a5885;
+   font-weight: 100;
+   font-size: 0.9rem;
+}
+.modalHeader__link:hover {
+   background-color: #e8e7e5;
+   cursor: pointer;
+}
+.modalHeader__line {
+   width: 82%;
+   margin:0 auto;
+   border-top:1px solid#2a5885;
+   margin-bottom: 0.2em;
+ }
+
+/*---Preloader---*/
+ .preloader__headerWrapper {
+   display: flex;
+   height:100%;
+}
+.preloader__headerBlock {
+ width:3em;
+ margin:auto;
+}
+
+

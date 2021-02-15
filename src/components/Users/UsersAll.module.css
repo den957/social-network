@@ -1,0 +1,104 @@
+.usersAll {
+   background-color: white;
+   border-radius: 0.2em;
+   width:66%;
+   border:1px solid #d3d9de;
+}
+.usersAll__title {
+   width:100%;
+   padding: 1.2em 1.6em;
+   font-size: 1.3rem;
+   font-weight: 100;
+   background-color: #fafbfc;
+   border-radius: 0.2em 0.2em 0em 0em;
+   border-bottom:1px solid #d3d9de;
+}
+.usersAll__body {
+   padding: 0em 2em 2em 2em;
+}
+.bodyUsersAll__row {
+   display: flex;
+   justify-content: space-between;
+   flex-wrap: wrap;
+}
+.bodyUsersAll__item {
+   width:30%;
+   margin-top: 2em;
+}
+.bodyUsersAll__image {
+   width:153px;
+   height:100px;
+}
+.bodyUsersAll__image > img {
+   width:100%;
+   object-fit: cover;
+   border-radius: 0.2em;
+}
+.bodyUsersAll__body {
+   margin-top: 0.5em;
+}
+.bodyUsersAll__row {
+   display: flex;
+   justify-content: space-between;
+}
+.bodyUsersAll__name {
+   flex:1 1 auto;
+   align-self: center;
+   color:#2a58a0;
+   font-size:1rem;
+   align-self: center;
+   max-width: 8em;
+   word-wrap: break-word;
+   line-height:1.3em;
+}
+.bodyUsersAll__name > span {
+   border-bottom: 1px solid transparent;
+}
+.bodyUsersAll__name > span:hover {
+   border-bottom: 1px solid #2a58a0;
+   cursor: pointer;
+}
+.bodyUsersAll__subscribe {
+   align-self: center;
+}
+
+.bodyUsersAll__subscribe > .bodyUsersAll__abled{
+   font-size: 1rem;
+   padding:0.35em;
+   color: white;
+   background-color: #5181b8;
+   border-radius: 0.2em;
+} 
+.bodyUsersAll__subscribe >.bodyUsersAll__abled:hover {
+   background-color:  #5f8dc1;
+}
+.bodyUsersAll__subscribe > .bodyUsersAll__disabled{
+   font-size: 1rem;
+   padding:0.35em;
+   color: white;
+   background-color: #c4c6e3;
+   border-radius: 0.2em;
+} 
+.bodyUsersAll__subscribe > .bodyUsersAll__disabled:hover {
+   cursor: auto;
+}
+
+/*---Preloader---*/
+.preloader__UsersAllWrapper {
+   display: flex;
+   height:100%;
+   width:100%
+}
+.preloader__UsersAllBlock {
+ width:5em;
+ margin:auto;
+}
+.preloader__UsersAllContainerWrapper {
+   display: flex;
+   height:80vh;
+   width:66%
+}
+.preloader__UsersAllContainerBlock {
+ width:10em;
+ margin:auto;
+}

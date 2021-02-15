@@ -1,0 +1,250 @@
+.profile__row {
+   display: flex;
+   justify-content: space-between;
+}
+.profile__narrow {
+   width:23%;
+}
+
+.profile__wide {
+   width:76%;
+}
+/*---------------------*/
+/*----ProfileMe------*/
+/*---------------------*/
+.profile__me {
+   width:100%;
+   background-color: white;
+   border:1px solid #d3d9de;
+   padding: 0.8em;
+   border-radius: 0.2em;
+}
+.meProfile__photo {
+   width:100%;
+   height: 18em;
+}
+.meProfile__photo > img {
+   width:100%;
+   height:100%;
+   object-fit: cover;
+   border-radius: 0.2em;
+}
+.meProfile__photo:hover .meProfile__block{
+   opacity: 1;
+   top:-5em;
+}
+.meProfile__block {
+   transition-duration: 500ms;
+   transition-property: all;
+   border-radius: 0em 0em 0.2em 0.2em;
+   width:100%;
+   height:5em;
+   background-color:	rgb(0,0,1,0.7);
+   position:relative;
+   top:0em;
+   opacity: 0;
+   padding:1.3em 0em 0em 0.7em;
+}
+.refreshProfile__fake {
+   display: flex;
+   z-index: 2;
+   color:#abb0b3;
+   font-size:1rem;
+}
+.refreshProfile__fake:hover {
+   color:white;
+   cursor:pointer;
+}
+.refreshProfile__fake > span {
+   display: block;
+   align-self: center;
+}
+.refreshProfile__input {
+   display:none;
+}
+.refreshProfile__arrowTop {
+   display: block;
+   font-size: 1.4rem;
+   margin-right: 0.4em;
+}
+.profile__edit {
+   position: relative;
+   border:1px solid #d3d9de;
+   border-top:none;
+   top:-0.85em;
+   z-index: 3;
+   width:100%;
+   height:4.7em;
+   background-color: white;
+   text-align: center;
+   padding-top: 0.7em;
+   margin-bottom: -0.2em;
+   border-radius: 0em 0em 0.2em 0.2em;
+}
+.editProfile__settings {
+   display: block;
+   width:89%;
+   margin:0 auto;
+   padding:0.6em;
+   border-radius: 0.2em;
+   background-color: #e5ebf1;
+   color: grey;
+   font-weight: 500;
+   font-size: 0.9rem;
+}
+.editProfile__settings:hover {
+   color:#b0b8bf;
+}
+.editProfile__messages {
+   display: block;
+   width:89%;
+   margin:0 auto;
+   padding:0.6em;
+   border-radius: 0.2em;
+   background-color: #e5ebf1;
+   color: grey;
+   font-weight: 500;
+   font-size: 0.9rem;
+}
+.editProfile__messages:hover {
+   color:#b0b8bf;
+}
+/*---------------------*/
+/*----EnterContacts----*/
+/*---------------------*/
+.profile__enter {
+   width:100%;
+   background-color: white;
+   border:1px solid #d3d9de;
+   padding:1em 0.8em;
+   border-radius: 0.2em;
+   font-weight: 100;
+   font-size: 0.9rem;
+}
+.profile__enter span {
+   color:black;
+}
+.enterProfile__link {
+   margin-right:0.5em;
+   color:#789cc6;
+}
+/*---------------------*/
+/*----ProfileInfo------*/
+/*---------------------*/
+.profile__info {
+   background-color: white;
+   border:1px solid #d3d9de;
+   padding: 0.6em 0.7em 0em 0.7em;
+   border-radius: 0.2em;
+   margin-bottom: 0.7em;
+}
+.infoProfile__fullName {
+   font-size: 1.7rem;
+}
+.infoProfile__status {
+   font-size: 0.9rem;
+   font-weight: 500;
+   padding: 0.3em 0.1em;
+   margin-bottom: 0.4em;
+}
+.infoProfile__status:hover {
+   background-color: #e8e7e5;
+   cursor: pointer;
+   border-radius:0.2em
+}
+.statusProfile__user {
+   font-size: 0.9rem;
+   font-weight: 500;
+   padding: 0.3em 0.1em;
+   margin-bottom: 0.4em;
+}
+.statusProfile__empty {
+   margin-bottom: 0.5em;
+}
+.infoProfile__line {
+   width:100%;
+   border-top:1px solid #e8e7e5;
+   margin-bottom: 0.8em;
+}
+.informationProfile {
+   margin-bottom: 0.5em;
+}
+.informationProfile__row {
+   display: flex;
+   flex-wrap: wrap;
+   align-items:flex-start;
+}
+.informationProfile__title {
+   width:25%;
+   color:gray;
+   font-weight: 100;
+   font-size: 1rem;
+}
+.informationProfile__answer {
+   width:75%;
+   color:#5181b8;
+   font-size: 1rem;
+   font-weight: 100;
+   margin-bottom: 0.6em;
+}
+.informationProfile__answer:last-child {
+   margin-bottom: 0em;
+}
+.infoProfile__showDetails {
+   margin-bottom: 0.8em;
+}
+.infoProfile__showDetails:hover {
+   background-color:  #e8e7e5;
+   border-radius: 0.2em;
+   cursor: pointer;
+}
+.infoProfile__showDetails > span {
+   margin-left:25%;
+   padding:0.7em 0em ;
+   display: block;
+   color:#5181b8;
+   font-weight: 100;
+   font-size: 1rem;
+}
+
+/*---Posts---*/
+.profile__addPost {
+   position: relative;
+   width:100%;
+   border:1px solid #d3d9de;
+   padding: 0.7em;
+   background-color: white;
+   border-radius: 0.2em;
+}
+.addPostProfile__row {
+   display: flex;
+   justify-content: space-between;
+}
+.addPostProfile__logo {
+   width:4%;
+   height:4%;
+}
+.addPostProfile__logo > img {
+   width:100%;
+   height:100%;
+   object-fit:cover;
+   border-radius: 50%;
+}
+
+/*---Preloader---*/
+.preloader__profileWrapper {
+   display: flex;
+   height:80vh;
+   width:83%
+}
+.preloader__profileBlock {
+ width:10em;
+ margin:auto;
+}
+/*---Break-Point---*/
+@media (max-width:400px){
+   .meProfile__photo {
+      width:100%;
+      height: 17em;
+   }
+}

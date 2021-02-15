@@ -1,0 +1,22 @@
+.form__modalStatus {
+   background-color: #fafbfc;
+}
+.modalStatus__input  {
+   width:100%;
+   padding:0.2em 0.4em;
+   background-color:white;
+   border:1px solid #d3d9de;
+   font-size: 1rem;
+   font-weight: 100;
+   margin-bottom: 0.8em;
+}
+.modalStatus__button {
+   padding:0.4em 1.2em;
+   background-color: #5181b8;
+   color:white;
+   border-radius: 0.2em;
+   font-size: 0.8rem;
+}
+.modalStatus__button:hover {
+   background-color: #5f8dc1;
+}

@@ -1,0 +1,70 @@
+.loader{
+	position:relative;
+	width:234px;
+	height:28px;
+	margin:auto;
+}
+
+.loader__item {
+	position:absolute;
+	top:0;left:0em;
+	width:3em;
+	height:3em;
+	border-radius:50%;
+	transform:scale(1);
+   animation-name:loading;
+	animation-duration:2s;
+	animation-direction:normal;
+	animation-iteration-count:infinite;
+}
+
+.loaderOne{
+	left:0;
+	animation-delay:0.05s;
+}
+
+.loaderTwo {
+	left:1em;
+	animation-delay:0.2s;
+}
+
+.loaderThree{
+	left:2em;
+	animation-delay:0.35s;
+}
+
+.loaderFour{
+	left:3em;
+	animation-delay:0.5s;
+}
+
+.loaderFive{
+	left:4em;
+	animation-delay:0.65s;
+}
+
+.loaderSix {
+	left:5em;
+	animation-delay:0.8s;
+}
+
+.loader-Seven {
+	left:6em;
+	animation-delay:0.95s;
+}
+
+.loader-Eight {
+	left:7em;
+	animation-delay:1.1s;
+}
+@keyframes loading{
+	0%{
+	    transform:scale(1);
+	    background-color:#5181b8;
+	}
+
+	100%{
+	    transform:scale(0);
+		background-color:white;
+	}
+}

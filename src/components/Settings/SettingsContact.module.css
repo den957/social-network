@@ -1,0 +1,15 @@
+.settings {
+   background-color: white;
+   border-radius: 0.2em;
+   width:66%;
+   border:1px solid #d3d9de;
+}
+.settings__title {
+   width:100%;
+   padding: 1.2em 1.6em;
+   font-size: 1.3rem;
+   font-weight: 100;
+   background-color: #fafbfc;
+   border-radius: 0.2em 0.2em 0em 0em;
+   border-bottom:1px solid #d3d9de;
+}

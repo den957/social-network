@@ -2,6 +2,7 @@
 
 
 ### Build with
+<<<<<<< HEAD
 - React
 - Redux
 - Html

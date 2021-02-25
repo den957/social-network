@@ -2,7 +2,7 @@ import { Field, reduxForm } from "redux-form";
 import { required } from "../../validators/validators";
 import s from './LoginForm.module.css'
 import { useState } from "react";
-import { Input, CheckboxSettings, CheckboxLogin } from "../Common/FormControl/FormControl";
+import { Input, CheckboxLogin } from "../Common/FormControl/FormControl";
 
 export const LoginForm = (props) => {
    const [checked, editChecked] = useState(false)

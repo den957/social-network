@@ -34,7 +34,7 @@ const ProfileReducer = (state = initialState, action) => {
       case getProfileMeInfoSuccessType: {
          return {
             ...state,
-            profileMeInfo: action.dataMe
+            profileMeInfo: action.dataMe,
          }
       }
       default: {

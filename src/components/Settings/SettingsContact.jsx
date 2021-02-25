@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from './SettingsContact.module.css'
 import { SettingsContactReduxForm } from './SettingsContactForm'
 import { connect } from 'react-redux'
 import { setProfileContactInfo } from '../../redux/profile.reducer'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
+import { Redirect } from 'react-router-dom'
 
 export const SettingsContact = (props) => {
+   const [isLoad, setIsLoad] = useState(false)
    const onSubmit = (dataContact) => {
       const
          [
@@ -30,6 +32,10 @@ export const SettingsContact = (props) => {
                props.userId
             ]
       props.setProfileContactInfo(fullName, aboutMe, lookingForAJobDescription, lookingForAJob, youtube, website, facebook, github, userId)
+      setIsLoad(true)
+   }
+   if (isLoad) {
+      return <Redirect to={'/profile'} />
    }
    return (
       <div className={s.settings}>
@@ -44,7 +50,8 @@ export const SettingsContact = (props) => {
 }
 const mapStateToProps = (state) => {
    return {
-      userId: state.auth.id
+      userId: state.auth.id,
+      isProfileMeInfo: state.profile.isProfileMeInfo
    }
 }
 const mapDispatchToProps = (dispatch) => {

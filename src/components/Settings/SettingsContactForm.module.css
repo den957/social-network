@@ -1,4 +1,5 @@
 .settings__form {
+   position: relative;
    width:100%;
    padding:1.5em 1em 1em 2em;
    font-weight: 100;
@@ -86,7 +87,7 @@
    display: none;
 }
 .settings__button {
-   margin:0em 0em 0em 1.9em ;
+   margin:0em 0em 0em 1.6em ;
    width:62%;
    text-align: center;
 }

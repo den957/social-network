@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import s from './SettingsContactForm.module.css'
 import { Field, reduxForm } from 'redux-form'
-import { contacts, data, maxLengthCreator, required } from '../../validators/validators'
+import { validUrlFormat, correctDateFormat, minLengthCreator, required } from '../../validators/validators'
 import { Input } from '../Common/FormControl/FormControl'
 
 const SettingsContactForm = (props) => {
@@ -19,9 +19,9 @@ const SettingsContactForm = (props) => {
             <div className={s.settings__body}>
                <div className={s.bodySettings__row}>
                   <div className={s.bodySettings__span}>Name:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'fullName'} validate={[required, maxLengthCreator(8)]} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'fullName'} validate={[required, minLengthCreator(8)]} /></div>
                   <div className={s.bodySettings__span}>Birthday:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'aboutMe'} validate={[required, data()]} placeholder={'dd.mm.yyyy'} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'aboutMe'} validate={[required, correctDateFormat()]} placeholder={'dd.mm.yyyy'} /></div>
                   <div className={s.bodySettings__span}>Town:</div>
                   <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'lookingForAJobDescription'} validate={[required]} /></div>
                   {!checked
@@ -47,13 +47,13 @@ const SettingsContactForm = (props) => {
             <div className={s.settings__body}>
                <div className={s.bodySettings__row}>
                   <div className={s.bodySettings__span}>Facebook:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'facebook'} validate={[required, contacts()]} placeholder={'https://www.'} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'facebook'} validate={[required, validUrlFormat()]} placeholder={'https://www.'} /></div>
                   <div className={s.bodySettings__span}>Linkedin:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'website'} validate={[required, contacts()]} placeholder={'https://www.'} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'website'} validate={[required, validUrlFormat()]} placeholder={'https://www.'} /></div>
                   <div className={s.bodySettings__span}>GitHub:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'github'} validate={[required, contacts()]} placeholder={'https://www.'} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'github'} validate={[required, validUrlFormat()]} placeholder={'https://www.'} /></div>
                   <div className={s.bodySettings__span}>YouTube:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'youtube'} validate={[required, contacts()]} placeholder={'https://www.'} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'youtube'} validate={[required, validUrlFormat()]} placeholder={'https://www.'} /></div>
                </div>
             </div>
             <div className={s.settings__line}></div>

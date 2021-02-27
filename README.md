@@ -1,20 +1,22 @@
 # React App Mini Social Network
 
-![](https://lh3.googleusercontent.com/hsMB723d6Hy0stovu5MQ5ChTNdHjvXte4bgKIXFAmgx-ESPzHyl_V994dNwF2wDSGXY2rQ=s170)
+#### Demo version: 
 
 ### Build with
 - React
 - Redux
-- Html
+- Redux Thunk
+- Redux Form
 - Css
 - Axios
 
 ### Features
-- Login/Logout account;
+- Login/logout account;
 - Change profile photo
 - Edit personal info
-- Follow, unfollow other users
+- Follow/unfollow other users
 - Change status
+- Add/delete your posts
 
 ### Installing 
 To install project, please download or clone code and after use:

@@ -1,7 +1,7 @@
 import s from './PreloaderLine.module.css'
 import cn from 'classnames'
 import React from 'react'
-const PreloaderLine = (props) => {
+const PreloaderLine = () => {
    return (
       <div className={s.loader}>
          <div className={cn(s.loaderOne, s.loader__item)}></div>

@@ -1,8 +1,9 @@
 import React from 'react'
+import s from './ModalStatus.module.css'
 import { connect } from 'react-redux'
 import { setProfileStatus } from '../../../redux/profile.reducer'
 import ModalStatusReduxForm from './ModalStatusForm'
-import s from './ModalStatus.module.css'
+
 export const ModalStatus = (props) => {
    const onSubmit = (dataForm) => {
       let status = dataForm.status

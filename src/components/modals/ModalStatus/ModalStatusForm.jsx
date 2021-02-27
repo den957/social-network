@@ -1,6 +1,6 @@
 import React from "react"
-import { Field, reduxForm } from "redux-form"
 import s from './ModalStatusForm.module.css'
+import { Field, reduxForm } from "redux-form"
 
 const ModalStatusForm = (props) => {
    return (

@@ -1,5 +1,5 @@
-import s from './SettingsContactForm.module.css'
 import React, { useState } from 'react'
+import s from './SettingsContactForm.module.css'
 import { Field, reduxForm } from 'redux-form'
 import { contacts, data, maxLengthCreator, required } from '../../validators/validators'
 import { Input } from '../Common/FormControl/FormControl'

@@ -3,12 +3,13 @@ import s from './Profile.module.css'
 import cn from 'classnames'
 import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom'
-import { getProfileInfo, getProfileMeInfo, getProfileStatus, setProfileImage, setProfileStatus } from '../../redux/profile.reducer'
+import { addProfilePost, getProfileInfo, getProfileMeInfo, getProfileStatus, removeProfilePost, setProfileImage, setProfileStatus } from '../../redux/profile.reducer'
 import Preloader from '../Common/Preloader/Preloader'
 import logo from '../../assets/images/logo.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowAltCircleUp, faHome } from '@fortawesome/free-solid-svg-icons'
-import { ProfileReduxPost } from './ProfilePost'
+import { ProfileReduxPost } from './ProfilePostCreate/ProfilePost'
+import ProfilePostList from './ProfilePostList/ProfilePostList'
 
 const Profile = (props) => {
    const [modalPost, setModalPost] = useState(false)
@@ -17,14 +18,19 @@ const Profile = (props) => {
       let image = e.target.files[0]
       props.setProfileImage(image)
    }
-   const onSubmit = (dataPost) => {
+   const generateDate = () => {
+      return new Date()
+   }
+   const onSubmit = (dataPosts) => {
       setModalPost(false)
-   }
-   const showDetails = () => {
-      editIsShowDetails(true)
-   }
-   const hideDetails = () => {
-      editIsShowDetails(false)
+      let id = `f${(+new Date).toString(16)}`;
+      let date = `${generateDate().toLocaleDateString()} at ${generateDate().toLocaleTimeString()}`
+      const dataPost = {
+         id: id,
+         post: dataPosts.post,
+         date: date
+      }
+      props.addProfilePost(dataPost)
    }
    return (
       <div className={s.profile}>
@@ -98,7 +104,7 @@ const Profile = (props) => {
                   </div>
                   {isShowDetails
                      ? <>
-                        <div className={s.infoProfile__showDetails} onClick={(e) => hideDetails()}>
+                        <div className={s.infoProfile__showDetails} onClick={(e) => editIsShowDetails(false)}>
                            <span>Hide detailed information</span>
                         </div>
                         <div className={s.infoProfile__information}>
@@ -128,7 +134,7 @@ const Profile = (props) => {
                         </div>
                      </>
                      : <>
-                        <div className={s.infoProfile__showDetails} onClick={(e) => showDetails()}>
+                        <div className={s.infoProfile__showDetails} onClick={(e) => editIsShowDetails(true)}>
                            <span>Show details</span>
                         </div>
                         <div></div>
@@ -137,14 +143,19 @@ const Profile = (props) => {
                   <div className={s.infoProfile__line}></div>
                </div>
                {props.isOwner && props.isAuth &&
-                  <div className={s.profile__addPost}>
-                     <div className={s.addPostProfile__row}>
-                        <div className={s.addPostProfile__logo}>
-                           <img src={props.profileMeInfo.photos.small} />
+                  <>
+                     <div className={s.profile__addPost}>
+                        <div className={s.addPostProfile__row}>
+                           <div className={s.addPostProfile__logo}>
+                              <img src={props.profileMeInfo.photos.small} />
+                           </div>
+                           <ProfileReduxPost onSubmit={onSubmit} setModalPost={setModalPost} modalPost={modalPost} />
                         </div>
-                        <ProfileReduxPost onSubmit={onSubmit} setModalPost={setModalPost} modalPost={modalPost} />
                      </div>
-                  </div>
+                     {props.profilePosts.length > 0 &&
+                        <ProfilePostList removeProfilePost={props.removeProfilePost} profileMeInfo={props.profileMeInfo} profilePosts={props.profilePosts} />
+                     }
+                  </>
                }
             </div>
          </div>
@@ -176,20 +187,19 @@ export const ProfileContainer = (props) => {
       <>
          {props.isAuth
             ? props.profileInfo && props.profileMeInfo
-               ? <Profile profileMeInfo={props.profileMeInfo} modalStatus={props.modalStatus} editModalStatus={props.editModalStatus} profileInfo={props.profileInfo} birthday={props.birthday} lookingForAJobDescription={props.lookingForAJobDescription} setProfileImage={props.setProfileImage} isOwner={!props.match.params.userId} profileStatus={props.profileStatus} profileImage={props.profileImage} setProfileStatus={props.setProfileStatus} lookingForAJob={props.lookingForAJob} isAuth={props.isAuth} />
+               ? <Profile removeProfilePost={props.removeProfilePost} profilePosts={props.profilePosts} addProfilePost={props.addProfilePost} profileMeInfo={props.profileMeInfo} modalStatus={props.modalStatus} editModalStatus={props.editModalStatus} profileInfo={props.profileInfo} birthday={props.birthday} lookingForAJobDescription={props.lookingForAJobDescription} setProfileImage={props.setProfileImage} isOwner={!props.match.params.userId} profileStatus={props.profileStatus} profileImage={props.profileImage} setProfileStatus={props.setProfileStatus} lookingForAJob={props.lookingForAJob} isAuth={props.isAuth} />
                : <div className={s.preloader__profileWrapper}>
                   <div className={s.preloader__profileBlock}>
                      <Preloader />
                   </div>
                </div >
             : props.profileInfo
-               ? <Profile modalStatus={props.modalStatus} editModalStatus={props.editModalStatus} profileInfo={props.profileInfo} birthday={props.birthday} lookingForAJobDescription={props.lookingForAJobDescription} setProfileImage={props.setProfileImage} isOwner={!props.match.params.userId} profileStatus={props.profileStatus} profileImage={props.profileImage} setProfileStatus={props.setProfileStatus} lookingForAJob={props.lookingForAJob} />
+               ? <Profile removeProfilePost={props.removeProfilePost} profilePosts={props.profilePosts} addProfilePost={props.addProfilePost} modalStatus={props.modalStatus} editModalStatus={props.editModalStatus} profileInfo={props.profileInfo} birthday={props.birthday} lookingForAJobDescription={props.lookingForAJobDescription} setProfileImage={props.setProfileImage} isOwner={!props.match.params.userId} profileStatus={props.profileStatus} profileImage={props.profileImage} setProfileStatus={props.setProfileStatus} lookingForAJob={props.lookingForAJob} />
                : <div className={s.preloader__profileWrapper}>
                   <div className={s.preloader__profileBlock}>
                      <Preloader />
                   </div>
                </div >
-
          }
       </>
    )
@@ -202,6 +212,7 @@ const mapStateToProps = (state) => {
       profileImage: state.profile.profileImage,
       profileStatus: state.profile.profileStatus,
       profileMeInfo: state.profile.profileMeInfo,
+      profilePosts: state.profile.profilePosts
 
    }
 }
@@ -211,7 +222,9 @@ const mapDispatchToProps = (dispatch) => {
       setProfileImage: (image) => { dispatch(setProfileImage(image)) },
       getProfileStatus: (userId) => { dispatch(getProfileStatus(userId)) },
       setProfileStatus: (status) => { dispatch(setProfileStatus(status)) },
-      getProfileMeInfo: (userId) => { dispatch(getProfileMeInfo(userId)) }
+      getProfileMeInfo: (userId) => { dispatch(getProfileMeInfo(userId)) },
+      addProfilePost: (dataPost) => { dispatch(addProfilePost(dataPost)) },
+      removeProfilePost: (id) => { dispatch(removeProfilePost(id)) }
    }
 }
 let withRouterUrlUserId = withRouter(ProfileContainer)

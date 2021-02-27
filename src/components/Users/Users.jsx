@@ -1,5 +1,5 @@
-import s from './Users.module.css'
 import React, { useEffect } from 'react'
+import s from './Users.module.css'
 import { connect } from 'react-redux'
 import { getUsersFollowedTC, unfollowUserTC } from '../../redux/users.reducer'
 import PreloaderLine from '../Common/Preloader/PreloaderLine/PreloaderLine'

@@ -9,7 +9,7 @@ export const Input = ({ input, meta, ...props }) => {
       </div>
    )
 }
-export const CheckboxLogin = ({ input, meta, ...props }) => {
+export const CheckBoxLogin = ({ input, meta, ...props }) => {
    return (
       <div className={meta.touched && meta.error ? s.checkboxLogin__validate : ''}>
          <checkbox {...input}{...props} />

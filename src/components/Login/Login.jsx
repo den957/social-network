@@ -1,8 +1,9 @@
+import React from 'react'
+import s from './Login.module.css'
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
 import { logInServerTC } from "../../redux/auth.reducer"
 import { LoginReduxForm } from "./LoginForm"
-import s from './Login.module.css'
 
 export const Login = (props) => {
    const onSubmit = (dataForm) => {

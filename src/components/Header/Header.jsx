@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import s from './Header.module.css'
+import cn from 'classnames'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import logoImg from '../../assets/images/logoImg.png'
-import cn from 'classnames'
 import { connect } from 'react-redux'
 import { logOutServerTC } from '../../redux/auth.reducer'
 import Preloader from '../Common/Preloader/Preloader'
@@ -62,7 +62,7 @@ export const Header = (props) => {
                </div>
             }
          </div>
-      </div >
+      </div>
    )
 }
 

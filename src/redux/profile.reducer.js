@@ -4,12 +4,14 @@ const getProfileInfoSuccessType = 'GET_PROFILE_INFO_SUCCESS'
 const setProfileImageSuccessType = 'SET_PROFILE_IMAGE_SUCCESS'
 const getProfileStatusSuccessType = 'GET_PROFILE_STATUS_SUCCESS'
 const getProfileMeInfoSuccessType = 'GET_PROFILE_ME_INFO_SUCCESS'
+const addProfilePostType = "ADD_PROFILE_POST_TYPE"
+const removeProfilePostType = "REMOVE_PROFILE_POST_TYPE"
 const initialState = {
    profileMeInfo: null,
    profileInfo: null,
    profileImage: null,
    profileStatus: null,
-   profilePosts: null
+   profilePosts: []
 }
 const ProfileReducer = (state = initialState, action) => {
    switch (action.type) {
@@ -37,6 +39,22 @@ const ProfileReducer = (state = initialState, action) => {
             profileMeInfo: action.dataMe,
          }
       }
+      case addProfilePostType: {
+         return {
+            ...state,
+            ...state.profilePosts.push(action.dataPost)
+         }
+      }
+      case removeProfilePostType: {
+         return {
+            ...state,
+            profilePosts: state.profilePosts.filter((post, index, arr) => {
+               if (post.id !== action.id) {
+                  return true
+               }
+            })
+         }
+      }
       default: {
          return state
       }
@@ -48,6 +66,8 @@ const getProfileInfoSuccess = (data) => ({ type: getProfileInfoSuccessType, data
 const setProfileImageSuccess = (img) => ({ type: setProfileImageSuccessType, img })
 const getProfileStatusSuccess = (status) => ({ type: getProfileStatusSuccessType, status })
 const getProfileMeInfoSuccess = (dataMe) => ({ type: getProfileMeInfoSuccessType, dataMe })
+export const addProfilePost = (dataPost) => ({ type: addProfilePostType, dataPost })
+export const removeProfilePost = (id) => ({ type: removeProfilePostType, id })
 
 export const getProfileInfo = (userId) => {
    return (dispatch) => {

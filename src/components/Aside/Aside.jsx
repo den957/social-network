@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faComment, faUsers, faCogs } from '@fortawesome/free-solid-svg-icons'
-
+// create aside block with links
 const Aside = () => {
    return (
       <div className={s.aside__menu}>

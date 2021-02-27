@@ -1,7 +1,7 @@
+import React, { useEffect, useState } from 'react'
 import s from './UsersAll.module.css'
 import cn from 'classnames'
 import { connect } from 'react-redux'
-import { useEffect, useState } from 'react'
 import { followUserTC, getOnceUnfollowedTC, getUsersUnfollowedTC, isFetchingUsers, unfollowUserTC } from '../../redux/users.reducer'
 import Preloader from '../Common/Preloader/Preloader'
 import userIcon from '../../assets/images/userIcon.png'

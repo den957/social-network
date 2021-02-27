@@ -6,7 +6,7 @@ import Messages from './components/Messages/Messages'
 import Users from './components/Users/Users'
 import Login from './components/Login/Login';
 import SettingsContact from './components/Settings/SettingsContact'
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { initializeTC } from './redux/app.reducer';
 import Preloader from './components/Common/Preloader/Preloader';
@@ -49,6 +49,7 @@ export const App = (props) => {
                   <Aside />
                 </div>
                 <div class='main__content'>
+                  <Route path={'/'} render={() => <Redirect to={'/profile'} />} />
                   <Route path={'/profile/:userId?'} render={() => <ProfileContainer editModalStatus={editModalStatus} modalStatus={modalStatus} />} />
                   <Route path={'/messages'} render={() => <Messages />} />
                   <Route exact path={'/users'} render={() => <Users />} />

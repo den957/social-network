@@ -1,17 +1,13 @@
 import './App.css';
 import React, { useEffect, useState } from 'react'
 import Aside from './components/Aside/Aside'
-/*import ProfileContainer from './components/Profile/Profile'*/
 import Messages from './components/Messages/Messages'
-/*import Users from './components/Users/Users'*/
-import Login from './components/Login/Login';
 import SettingsContact from './components/Settings/SettingsContact'
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { initializeTC } from './redux/app.reducer';
 import Preloader from './components/Common/Preloader/Preloader';
 import ModalStatus from './components/modals/ModalStatus/ModalStatus';
-import UsersAll from './components/Users/UsersAll';
 import Header from './components/Header/Header';
 import { MetaTags } from 'react-meta-tags'
 import { ReactTitle } from 'react-meta-tags'
@@ -39,7 +35,7 @@ export const App = (props) => {
   else {
     return (
       <>
-        <ReactTitle title={'page'} />
+        <ReactTitle title={'Vkontakte'} />
         <MetaTags>
           <meta charset='UTF-8' />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />

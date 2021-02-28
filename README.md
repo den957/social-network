@@ -1,6 +1,6 @@
 # React App Mini Social Network
 
-#### Demo version: 
+#### Demo version: https://den957.github.io/social-network/
 
 ### Build with
 - React

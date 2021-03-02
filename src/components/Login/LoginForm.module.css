@@ -65,3 +65,8 @@
 .login__button:hover {
    background-color: #5f8dc1;
 }
+.login__captcha {
+   position: relative;
+   left:30%;
+   text-align: center;
+}

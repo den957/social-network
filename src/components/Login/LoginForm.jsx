@@ -31,8 +31,8 @@ export const LoginForm = (props) => {
             </div>
          }
          <div>
-            {props.isCaptcha && <img src={props.urlCaptcha} />}
-            {props.isCaptcha && <Field component={'input'} type={'input'} name={'captcha'} />}
+            {props.isCaptcha && <img className={s.login__captcha} src={props.urlCaptcha} />}
+            {props.isCaptcha && <div className={s.login__item}><Field className={s.login__input} component={'input'} type={'input'} name={'captcha'} /></div>}
          </div>
          <button className={s.login__button} type={'submit'}>To come in</button>
       </form>

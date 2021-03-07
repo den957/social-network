@@ -42,7 +42,7 @@ const Profile = (props) => {
                      {props.isOwner &&
                         <div className={s.meProfile__block}>
                            <div className={s.meProfile__refresh}>
-                              <label className={s.refreshProfile__fake} for={'avatar-img'}><FontAwesomeIcon icon={faArrowAltCircleUp} className={s.refreshProfile__arrowTop} /><span>Refresh photo</span></label>
+                              <label className={s.refreshProfile__fake} htmlFor={'avatar-img'}><FontAwesomeIcon icon={faArrowAltCircleUp} className={s.refreshProfile__arrowTop} /><span>Refresh photo</span></label>
                               <input className={s.refreshProfile__input} type='file' id={'avatar-img'} name='avatar-img' onChange={(e) => { onChangeAvatar(e) }} />
                            </div>
                         </div>

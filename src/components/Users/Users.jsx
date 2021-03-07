@@ -30,7 +30,7 @@ export const Users = (props) => {
                   {props.usersFollowed.map((user) => {
                      return (
                         user.followed &&
-                        <div className={s.requestUsers__item}>
+                        <div className={s.requestUsers__item} key={user.id}>
                            <div className={s.itemUsers__row}>
                               <NavLink className={s.itemUsers__image} to={`/profile/${user.id}`}>
                                  {!user.photos.small

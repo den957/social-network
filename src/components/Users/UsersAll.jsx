@@ -20,7 +20,7 @@ export const UsersAll = (props) => {
             <div className={s.bodyUsersAll__row}>
                {props.usersUnfollowed.map((user) => {
                   return (
-                     <div className={s.bodyUsersAll__item}>
+                     <div className={s.bodyUsersAll__item} key={user.id}>
                         <NavLink className={s.bodyUsersAll__image} to={`/profile/${user.id}`}>
                            {user.photos.small
                               ? <img src={user.photos.small} />

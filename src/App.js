@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './App.css';
+import s from './App.module.css';
 import Aside from './components/Aside/Aside'
 import Messages from './components/Messages/Messages'
 import SettingsContact from './components/Settings/SettingsContact'
@@ -25,8 +25,8 @@ export const App = (props) => {
   const [modalStatus, editModalStatus] = useState(false)
   if (!props.initializer) {
     return (
-      <div class='preloader__AppWrapper'>
-        <div class='preloader__AppBlock'>
+      <div className={s.preloader__AppWrapper}>
+        <div className={s.preloader__AppBlock}>
           <Preloader />
         </div>
       </div>
@@ -35,20 +35,15 @@ export const App = (props) => {
   else {
     return (
       <>
-        <ReactTitle title={'Vkontakte'} />
-        <MetaTags>
-          <meta charset='UTF-8' />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        </MetaTags>
-        <div class='wrapper'>
+        <div className={s.wrapper}>
           <Header />
-          <div class='main'>
-            <div class='container'>
-              <div class='main__row'>
-                <div class='main__aside'>
+          <div className={s.main}>
+            <div className={s.container}>
+              <div className={s.main__row}>
+                <div className={s.main__aside}>
                   <Aside />
                 </div>
-                <div class='main__content'>
+                <div className={s.main__content}>
                   <Route path={'/profile/:userId?'} render={withSuspense(() => { return <ProfileContainerLazy editModalStatus={editModalStatus} modalStatus={modalStatus} /> })} />
                   <Route path={'/messages'} render={() => <Messages />} />
                   <Route exact path={'/users'} render={withSuspense(UsersContainerLazy)} />

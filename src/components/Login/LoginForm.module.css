@@ -43,10 +43,8 @@
 .checkbox__active::after {
    background-color: #5f8dc1;
 }
-.login__checkbox > input {
-   margin-left: 1.2em;
+.checkboxLogin__checkbox {
    display: none;
-   
 }
 .login__checkbox > span {
    margin-left: 1.8em;

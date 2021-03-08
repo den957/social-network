@@ -1,4 +1,5 @@
 import { authApi } from '../api/api'
+import { loginFormFailAC } from './login.reducer'
 
 
 const setIsAuthType = 'SET_IS_AUTH_TYPE'
@@ -56,6 +57,10 @@ export const logInServerTC = (email, password, rememberMe, captcha) => {
          }
          else if (data.resultCode === 10) {
             dispatch(getCaptchaTC())
+            dispatch(loginFormFailAC())
+         }
+         else {
+            dispatch(loginFormFailAC())
          }
       })
    }

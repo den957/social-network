@@ -12,7 +12,7 @@ export const Input = ({ input, meta, ...props }) => {
 export const CheckBoxLogin = ({ input, meta, ...props }) => {
    return (
       <div className={meta.touched && meta.error ? s.checkboxLogin__validate : ''}>
-         <checkbox {...input}{...props} />
+         <input {...input}{...props} />
          {meta.touched && meta.error ? <span>{meta.error}</span> : ''}
       </div>
    )

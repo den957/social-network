@@ -22,11 +22,11 @@ export const LoginForm = (props) => {
          <div className={s.login__item}><Field className={s.login__input} component={Input} type={'password'} name={'password'} validate={required} /></div>
          {!checked
             ? <div onClick={(e) => checkedSuccess()} className={classChecked}>
-               <Field component={CheckBoxLogin} type={'checkbox'} name={'rememberMe'} validate={required} checked={checked} />
+               <Field component={CheckBoxLogin} className={s.checkboxLogin__checkbox} type={'checkbox'} name={'rememberMe'} validate={required} checked={checked} />
                <span>Remember me</span>
             </div>
             : <div onClick={(e) => checkedFailure()} className={classChecked}>
-               <Field component={CheckBoxLogin} type={'checkbox'} name={'rememberMe'} checked={checked} />
+               <Field component={CheckBoxLogin} className={s.checkboxLogin__checkbox} type={'checkbox'} name={'rememberMe'} checked={checked} />
                <span>Remember me</span>
             </div>
          }

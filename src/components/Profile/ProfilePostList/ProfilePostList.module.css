@@ -39,6 +39,7 @@
 }
 .newPostProfileContent {
    color:#757575;
+   word-wrap: break-word;
 }
 .newPostProfileRemove {
    position: absolute;

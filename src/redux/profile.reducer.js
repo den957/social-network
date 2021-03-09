@@ -113,9 +113,9 @@ export const setProfileStatus = (status) => {
       })
    }
 }
-export const setProfileContactInfo = (fullName, aboutMe, lookingForAJobDescription, lookingForAJob, youtube, website, facebook, github, userId) => {
+export const setProfileContactInfo = (fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github, userId) => {
    return (dispatch) => {
-      profileApi.setContactInfo(fullName, aboutMe, lookingForAJobDescription, lookingForAJob, youtube, website, facebook, github).then((data) => {
+      profileApi.setContactInfo(fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github).then((data) => {
          if (data.resultCode === 0) {
             dispatch(getProfileMeInfo(userId))
             dispatch(getProfileInfo(userId))

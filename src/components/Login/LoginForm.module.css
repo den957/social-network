@@ -16,12 +16,17 @@
 }
 .login__checkbox {
    position: relative;
-   left:32.5%;
-   width:16%;
-   margin-top: 1em;
+   left:0;
+   width:1px;
 }
-.login__checkbox:hover {
-   cursor: pointer;
+.login__checkboxBlock {
+   width:8.5em;
+}
+.login__checkboxBlock:hover {
+   cursor:pointer;
+}
+.login__checkboxBlock > span {
+   margin-left: 1.5em;
 }
 .login__checkbox::before {
    content:'';
@@ -43,11 +48,11 @@
 .checkbox__active::after {
    background-color: #5f8dc1;
 }
-.checkboxLogin__checkbox {
-   display: none;
-}
-.login__checkbox > span {
-   margin-left: 1.8em;
+.checkboxLogin {
+   position: absolute;
+   -moz-appearance: none;
+   -webkit-appearance: none;
+   appearance: none;
 }
 .login__button {
    position: relative;

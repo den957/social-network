@@ -23,7 +23,7 @@ export const validUrlFormat = () => {
       return 'Invalid url address'
    }
 }
-export const correctDateFormat = () => {
+export const validDateFormat = () => {
    return (value) => {
       let regExp = /^(\d{1,2})[\s\.\/-](\d{1,2})[\s\.\/-](\d{4})$/
       if (regExp.test(value) === true) {

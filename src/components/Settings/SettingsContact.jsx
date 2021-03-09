@@ -14,7 +14,7 @@ export const SettingsContact = (props) => {
             fullName,
             aboutMe,
             lookingForAJobDescription,
-            lookingForAJob,
+            isMarried,
             youtube,
             facebook,
             github,
@@ -24,14 +24,14 @@ export const SettingsContact = (props) => {
                dataContact.fullName,
                dataContact.aboutMe,
                dataContact.lookingForAJobDescription,
-               dataContact.lookingForAJob,
+               dataContact.married,
                dataContact.youtube,
                dataContact.facebook,
                dataContact.github,
                dataContact.website,
                props.userId
             ]
-      props.setProfileContactInfo(fullName, aboutMe, lookingForAJobDescription, lookingForAJob, youtube, website, facebook, github, userId)
+      props.setProfileContactInfo(fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github, userId)
       setIsLoad(true)
    }
    if (isLoad) {
@@ -56,7 +56,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
    return {
-      setProfileContactInfo: (fullName, aboutMe, lookingForAJobDescription, lookingForAJob, youtube, website, facebook, github, userId) => { dispatch(setProfileContactInfo(fullName, aboutMe, lookingForAJobDescription, lookingForAJob, youtube, website, facebook, github, userId)) }
+      setProfileContactInfo: (fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github, userId) => { dispatch(setProfileContactInfo(fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github, userId)) }
    }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(SettingsContact))

@@ -7,7 +7,6 @@ import profileReducer from './profile.reducer'
 import appReducer from './app.reducer'
 import loginReducer from './login.reducer'
 
-const loginFormFailType = 'AUTH_LOGIN_FAIL'
 export const reducers = combineReducers({
    auth: authReducer,
    users: usersReducer,
@@ -17,7 +16,6 @@ export const reducers = combineReducers({
       login: loginReducer
    })
 })
-export const loginFormFailAC = () => ({ type: loginFormFailType })
 const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 export default store
 window.store = store

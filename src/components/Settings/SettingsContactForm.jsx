@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import s from './SettingsContactForm.module.css'
 import { Field, reduxForm } from 'redux-form'
-import { validUrlFormat, correctDateFormat, minLengthCreator, required } from '../../validators/validators'
+import { minLengthCreator, required, validUrlFormat, validDateFormat } from '../../validators/validators'
 import { Input } from '../Common/FormControl/FormControl'
+
+const minLength8 = minLengthCreator(8)
+const validUrl = validUrlFormat()
+const validDate = validDateFormat()
 
 const SettingsContactForm = (props) => {
    const [activeCheckbox, setActiveCheckbox] = useState(`${s.bodySettings__checkbox}`)
@@ -19,21 +23,24 @@ const SettingsContactForm = (props) => {
             <div className={s.settings__body}>
                <div className={s.bodySettings__row}>
                   <div className={s.bodySettings__span}>Name:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'fullName'} validate={[required, minLengthCreator(8)]} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'fullName'} validate={[required, minLength8]} /></div>
                   <div className={s.bodySettings__span}>Birthday:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'aboutMe'} validate={[required, correctDateFormat()]} placeholder={'dd.mm.yyyy'} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'aboutMe'} placeholder={'dd.mm.yyyy'} validate={[required, validDate]} /></div>
                   <div className={s.bodySettings__span}>Town:</div>
                   <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'lookingForAJobDescription'} validate={[required]} /></div>
-                  {!checked
-                     ? <>
-                        <div className={s.bodySettings__span}>Married:</div>
-                        <div className={s.bodySettings__input}><div onClick={() => { setActiveCheckbox(`${s.bodySettings__checkbox} ${s.bodySettings__checkboxActive}`); setChecked(true) }} className={activeCheckbox}><Field className={s.bodySettings__elCheckbox} component={'input'} type={'checkbox'} name={'rememberMe'} checked={checked} /></div></div>
-                     </>
-                     : <>
-                        <div className={s.bodySettings__span}>Married:</div>
-                        <div className={s.bodySettings__input}><div onClick={() => { setActiveCheckbox(`${s.bodySettings__checkbox}`); setChecked(false) }} className={activeCheckbox}><Field className={s.bodySettings__elCheckbox} component={'input'} type={'checkbox'} name={'rememberMe'} checked={checked} /></div></div>
-                     </>
-                  }
+                  <div className={s.bodySettings__span}>Married:</div>
+                  <div className={s.bodySettings__input}>
+                     {!checked
+                        ? <label>
+                           <div onClick={() => { setActiveCheckbox(`${s.bodySettings__checkbox} ${s.bodySettings__checkboxActive}`); setChecked(true); }} className={activeCheckbox}></div>
+                           <Field className={s.bodySettings__elCheckbox} component={'input'} type={'checkbox'} name={'married'} checked={checked} />
+                        </label>
+                        : <label>
+                           <div onClick={() => { setActiveCheckbox(`${s.bodySettings__checkbox}`); setChecked(false); }} className={activeCheckbox}></div>
+                           <Field className={s.bodySettings__elCheckbox} component={'input'} type={'checkbox'} name={'married'} checked={checked} />
+                        </label>
+                     }
+                  </div>
                </div>
             </div>
          </div>
@@ -47,13 +54,13 @@ const SettingsContactForm = (props) => {
             <div className={s.settings__body}>
                <div className={s.bodySettings__row}>
                   <div className={s.bodySettings__span}>Facebook:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'facebook'} validate={[required, validUrlFormat()]} placeholder={'https://www.'} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'facebook'} placeholder={'https://www.'} validate={[required, validUrl]} /></div>
                   <div className={s.bodySettings__span}>Linkedin:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'website'} validate={[required, validUrlFormat()]} placeholder={'https://www.'} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'website'} placeholder={'https://www.'} validate={[required, validUrl]} /></div>
                   <div className={s.bodySettings__span}>GitHub:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'github'} validate={[required, validUrlFormat()]} placeholder={'https://www.'} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'github'} placeholder={'https://www.'} validate={[required, validUrl]} /></div>
                   <div className={s.bodySettings__span}>YouTube:</div>
-                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'youtube'} validate={[required, validUrlFormat()]} placeholder={'https://www.'} /></div>
+                  <div className={s.bodySettings__input}><Field className={s.bodySettings__el} component={Input} type={'text'} name={'youtube'} placeholder={'https://www.'} validate={[required, validUrl]} /></div>
                </div>
             </div>
             <div className={s.settings__line}></div>

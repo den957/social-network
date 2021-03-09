@@ -8,15 +8,3 @@
    left:0.5em;
    font-size: 0.8rem;
 }
-.checkboxLogin__validate > input{
-   border: 1px solid red;
-   width:75%;
-}
-.checkboxLogin__validate > span{
-   color:red;
-   position: absolute;
-   left:11em;
-   font-size: 0.8rem;
-   width:7em;
-   top:0.3em;
-}

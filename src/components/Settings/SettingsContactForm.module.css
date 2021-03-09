@@ -42,6 +42,7 @@
 .bodySettings__input {
    width:75%;
 }
+
 .bodySettings__el {
    width: 75%;
    padding: 0.3em;
@@ -58,7 +59,6 @@
 }
 .bodySettings__checkbox::before {
    transition-duration :1000ms;
-
    content:'';
    position: absolute;
    width:3.1em;height: 1.3em;
@@ -84,7 +84,10 @@
    left:1.4em;
 }
 .bodySettings__elCheckbox {
-   display: none;
+   position: absolute;
+   -moz-appearance: none;
+   -webkit-appearance: none;
+   appearance: none;
 }
 .settings__button {
    margin:0em 0em 0em 1.6em ;

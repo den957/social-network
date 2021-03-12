@@ -1,10 +1,12 @@
 import { getInfoAuthTC } from "./auth.reducer"
 
 const initializeSuccessType = 'INITIALIZE_SUCCESS'
+
 const initialState = {
    initializer: false
 }
-const appReducer = (state = initialState, action) => {
+type initialStateType = typeof initialState
+const appReducer = (state: initialStateType = initialState, action: any): initialStateType => {
    switch (action.type) {
       case initializeSuccessType: {
          return {
@@ -17,9 +19,13 @@ const appReducer = (state = initialState, action) => {
    }
 }
 export default appReducer
-const initializeSuccess = () => ({ type: initializeSuccessType })
+type initializeSuccessACType = {
+   type: typeof initializeSuccessType
+}
+const initializeSuccess = (): initializeSuccessACType => ({ type: initializeSuccessType })
+
 export const initializeTC = () => {
-   return (dispatch) => {
+   return (dispatch: any) => {
       let promiseOne = dispatch(getInfoAuthTC())
       Promise.all([promiseOne]).then((data) => {
          dispatch(initializeSuccess())

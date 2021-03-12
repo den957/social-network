@@ -4,21 +4,22 @@ import { loginFormFailAC } from './login.reducer'
 
 const setIsAuthType = 'SET_IS_AUTH_TYPE'
 const getCaptchaSuccessType = 'GET_CAPTCHA_SUCCESS'
+
 const initialState = {
    isAuth: false,
-   login: null,
-   id: null,
-   email: null,
+   login: null as null | string,
+   id: null as null | number,
+   email: null as null | string,
    isCaptcha: false,
-   urlCaptcha: null
+   urlCaptcha: null as null | string
 }
-const authReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+const authReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
    switch (action.type) {
       case setIsAuthType: {
          return {
             ...state,
             ...action.data
-
          }
       }
       case getCaptchaSuccessType: {
@@ -33,11 +34,26 @@ const authReducer = (state = initialState, action) => {
       }
    }
 }
-const setIsAuthAC = (login, id, email, isAuth) => ({ type: setIsAuthType, data: { login, id, email, isAuth } })
-const getCaptchaSuccess = (urlCaptcha, isCaptcha) => ({ type: getCaptchaSuccessType, urlCaptcha, isCaptcha })
+type SetIsAuthACDataType = {
+   login: string | null,
+   id: number | null,
+   email: string | null,
+   isAuth: boolean
+}
+type SetIsAuthACType = {
+   type: typeof setIsAuthType,
+   data: SetIsAuthACDataType
+}
+type GetCaptchaSuccessACType = {
+   type: typeof getCaptchaSuccessType,
+   urlCaptcha: string | null,
+   isCaptcha: boolean
+}
+const setIsAuthAC = (login: string | null, id: number | null, email: string | null, isAuth: boolean): SetIsAuthACType => ({ type: setIsAuthType, data: { login, id, email, isAuth } })
+const getCaptchaSuccess = (urlCaptcha: string | null, isCaptcha: boolean): GetCaptchaSuccessACType => ({ type: getCaptchaSuccessType, urlCaptcha, isCaptcha })
 
 export const getInfoAuthTC = () => {
-   return (dispatch) => {
+   return (dispatch: any) => {
       return authApi.me()
          .then((data) => {
             if (data.resultCode === 0) {
@@ -48,8 +64,8 @@ export const getInfoAuthTC = () => {
          })
    }
 }
-export const logInServerTC = (email, password, rememberMe, captcha) => {
-   return (dispatch) => {
+export const logInServerTC = (email: string, password: string, rememberMe: boolean, captcha: string) => {
+   return (dispatch: any) => {
       authApi.logIn(email, password, rememberMe, captcha).then((data) => {
          if (data.resultCode === 0) {
             dispatch(getInfoAuthTC())
@@ -66,7 +82,7 @@ export const logInServerTC = (email, password, rememberMe, captcha) => {
    }
 }
 export const logOutServerTC = () => {
-   return (dispatch) => {
+   return (dispatch: any) => {
       authApi.logOut().then((data) => {
          if (data.resultCode === 0) {
             dispatch(setIsAuthAC(null, null, null, false))
@@ -75,7 +91,7 @@ export const logOutServerTC = () => {
    }
 }
 export const getCaptchaTC = () => {
-   return (dispatch) => {
+   return (dispatch: any) => {
       authApi.getCaptcha().then((data) => {
          let urlCaptcha = data.url
          dispatch(getCaptchaSuccess(urlCaptcha, true))

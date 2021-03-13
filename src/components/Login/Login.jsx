@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
    return {
       isCaptcha: state.auth.isCaptcha,
       urlCaptcha: state.auth.urlCaptcha,
-      isAuth: state.auth.isAuth
+      isAuth: state.auth.isAuth,
    }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

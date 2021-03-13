@@ -14,7 +14,7 @@ const initialState = {
    urlCaptcha: null as null | string
 }
 type InitialStateType = typeof initialState
-const authReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
+const authReducer = (state = initialState, action: any): InitialStateType => {
    switch (action.type) {
       case setIsAuthType: {
          return {

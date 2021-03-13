@@ -5,8 +5,8 @@ const initializeSuccessType = 'INITIALIZE_SUCCESS'
 const initialState = {
    initializer: false
 }
-type initialStateType = typeof initialState
-const appReducer = (state: initialStateType = initialState, action: any): initialStateType => {
+type InitialStateType = typeof initialState
+const appReducer = (state = initialState, action: any): InitialStateType => {
    switch (action.type) {
       case initializeSuccessType: {
          return {
@@ -19,10 +19,10 @@ const appReducer = (state: initialStateType = initialState, action: any): initia
    }
 }
 export default appReducer
-type initializeSuccessACType = {
+type InitializeSuccessACType = {
    type: typeof initializeSuccessType
 }
-const initializeSuccess = (): initializeSuccessACType => ({ type: initializeSuccessType })
+const initializeSuccess = (): InitializeSuccessACType => ({ type: initializeSuccessType })
 
 export const initializeTC = () => {
    return (dispatch: any) => {

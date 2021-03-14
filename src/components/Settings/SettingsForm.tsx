@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
-import s from './SettingsContactForm.module.css'
-import { Field, reduxForm } from 'redux-form'
+import s from './SettingsForm.module.css'
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { minLengthCreator, required, validUrlFormat, validDateFormat } from '../../validators/validators'
 import { Input } from '../Common/FormControl/FormControl'
 
 const minLength8 = minLengthCreator(8)
 const validUrl = validUrlFormat()
 const validDate = validDateFormat()
-
-const SettingsContactForm = (props) => {
-   const [activeCheckbox, setActiveCheckbox] = useState(`${s.bodySettings__checkbox}`)
-   const [checked, setChecked] = useState(false)
+const SettingsForm: React.StatelessComponent<InjectedFormProps<{}>> = ({ handleSubmit }) => {
+   const [activeCheckbox, setActiveCheckbox] = useState<string>(`${s.bodySettings__checkbox}`)
+   const [checked, setChecked] = useState<boolean>(false)
    return (
-      <form className={s.settings__form} onSubmit={props.handleSubmit}>
+      <form className={s.settings__form} onSubmit={handleSubmit}>
          <div className={s.settings__main}>
             <div className={s.settings__title}>
                <div className={s.titleSettings__row}>
@@ -32,11 +31,11 @@ const SettingsContactForm = (props) => {
                   <div className={s.bodySettings__input}>
                      {!checked
                         ? <label>
-                           <div onClick={() => { setActiveCheckbox(`${s.bodySettings__checkbox} ${s.bodySettings__checkboxActive}`); setChecked(true); }} className={activeCheckbox}></div>
+                           <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => { setActiveCheckbox(`${s.bodySettings__checkbox} ${s.bodySettings__checkboxActive}`); setChecked(true); }} className={activeCheckbox}></div>
                            <Field className={s.bodySettings__elCheckbox} component={'input'} type={'checkbox'} name={'married'} checked={checked} />
                         </label>
                         : <label>
-                           <div onClick={() => { setActiveCheckbox(`${s.bodySettings__checkbox}`); setChecked(false); }} className={activeCheckbox}></div>
+                           <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => { setActiveCheckbox(`${s.bodySettings__checkbox}`); setChecked(false); }} className={activeCheckbox}></div>
                            <Field className={s.bodySettings__elCheckbox} component={'input'} type={'checkbox'} name={'married'} checked={checked} />
                         </label>
                      }
@@ -71,4 +70,4 @@ const SettingsContactForm = (props) => {
       </form>
    )
 }
-export const SettingsContactReduxForm = reduxForm({ form: 'settings' })(SettingsContactForm)
+export const SettingsReduxForm = reduxForm({ form: 'settings' })(SettingsForm)

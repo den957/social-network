@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react'
 import s from './App.module.css';
 import Aside from './components/Aside/Aside'
 import Messages from './components/Messages/Messages'
-import SettingsContact from './components/Settings/SettingsContact'
+import Settings from './components/Settings/Settings'
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { initializeTC } from './redux/app.reducer';
 import Preloader from './components/Common/Preloader/Preloader';
 import ModalStatus from './components/modals/ModalStatus/ModalStatus';
 import Header from './components/Header/Header';
-import { MetaTags } from 'react-meta-tags'
-import { ReactTitle } from 'react-meta-tags'
 import { withSuspense } from './hoc/withSuspense';
 
 const ProfileContainerLazy = React.lazy(() => { return import('./components/Profile/Profile') })
@@ -47,7 +45,7 @@ export const App = (props) => {
                   <Route path={'/profile/:userId?'} render={withSuspense(() => { return <ProfileContainerLazy editModalStatus={editModalStatus} modalStatus={modalStatus} /> })} />
                   <Route path={'/messages'} render={() => <Messages />} />
                   <Route exact path={'/users'} render={withSuspense(UsersContainerLazy)} />
-                  <Route path={'/settings'} render={() => <SettingsContact />} />
+                  <Route path={'/settings'} render={() => <Settings />} />
                   <Route path={'/login'} render={withSuspense(LoginContainerLazy)} />
                   <Route path={'/users/all'} render={withSuspense(UsersAllContainerLazy)} />
                 </div>

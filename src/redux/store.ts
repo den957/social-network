@@ -16,6 +16,8 @@ export const reducers = combineReducers({
       login: loginReducer
    })
 })
+type ReducersType = typeof reducers
+export type AppReducerType = ReturnType<ReducersType>
+
 const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 export default store
-window.store = store

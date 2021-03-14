@@ -14,9 +14,9 @@ import { ReactTitle } from 'react-meta-tags'
 import { withSuspense } from './hoc/withSuspense';
 
 const ProfileContainerLazy = React.lazy(() => { return import('./components/Profile/Profile') })
-const UsersContainerLazy = React.lazy(() => { return import('./components/Users/Users') })
+const UsersContainerLazy = React.lazy(() => { return import('./components/Users/UsersContainer') })
 const LoginContainerLazy = React.lazy(() => { return import('./components/Login/Login') })
-const UsersAllContainerLazy = React.lazy(() => { return import('./components/Users/UsersAll') })
+const UsersAllContainerLazy = React.lazy(() => { return import('./components/Users/UsersAll/UsersAllContainer') })
 
 export const App = (props) => {
   useEffect(() => {

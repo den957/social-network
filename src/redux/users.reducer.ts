@@ -1,5 +1,5 @@
 import { userApi } from '../api/api'
-import { InfoContactsPhotoType } from '../types/types'
+import { ReadyToggleType, UsersType } from '../types/types'
 
 const getUsersFollowedSuccessType = "GET_USERS_FOLLOWED__SUCCESS"
 const getUsersUnfollowedSuccessType = "GET_USERS_UNFOLLOWED__SUCCESS"
@@ -9,16 +9,6 @@ const followUserSuccessType = 'FOLLOW_USER_SUCCESS_TYPE'
 const setReadyToggleType = 'SET_READY_TOGGLE'
 const isFetchingUsersType = 'IS_FETCHING_USERS'
 
-type UsersType = {
-   id: number,
-   name: string,
-   status: string,
-   photos: InfoContactsPhotoType,
-}
-type IsReadyToggleType = {
-   value: boolean,
-   userId: number
-}
 const initialState = {
    countFollowed: 5, //count of items on one portion
    countUnfollowed: 24,
@@ -28,7 +18,7 @@ const initialState = {
    pageUnfollowed: 1,
    totalCount: null as number | null, //count all of items 
    isReadyPage: false, //all thunks in container are finished
-   isReadyToggle: [] as Array<IsReadyToggleType>,
+   readyToggle: [] as Array<ReadyToggleType>,
    isFetching: false
 }
 type InitialStateType = typeof initialState
@@ -83,9 +73,9 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
       case setReadyToggleType: {
          return {
             ...state,
-            isReadyToggle: action.value
-               ? [...state.isReadyToggle, action.userId]
-               : state.isReadyToggle.filter(id => id !== action.userId)
+            readyToggle: action.value
+               ? [...state.readyToggle, action.userId]
+               : state.readyToggle.filter(id => id !== action.userId)
          }
       }
       case isFetchingUsersType: {
@@ -157,10 +147,8 @@ export const getUsersUnfollowedTC = (count: number, page: number, follower: bool
    return (dispatch: any) => {
       userApi.getUsers(count, page, follower)
          .then((data) => {
-            const users = data.items
-            let totalCount = data.totalCount
             page++
-            dispatch(getUsersUnfollowedSuccess(users, totalCount, page, follower))
+            dispatch(getUsersUnfollowedSuccess(data.items, data.totalCount, page, follower))
          })
          .finally(() => {
             dispatch(isFetchingUsers(false))

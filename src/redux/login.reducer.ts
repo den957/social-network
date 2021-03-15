@@ -9,7 +9,8 @@ const initialState = {
    }
 }
 type InitialStateType = typeof initialState
-const loginReducer = (state = initialState, action: any): InitialStateType => {
+type ActionsType = LoginFormFailACType
+const loginReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
       case loginFormFailType: {
          return {
@@ -28,7 +29,7 @@ const loginReducer = (state = initialState, action: any): InitialStateType => {
    }
 }
 export default loginReducer
-type LoginFormFailACType = {
+export type LoginFormFailACType = {
    type: typeof loginFormFailType
 }
 export const loginFormFailAC = (): LoginFormFailACType => ({ type: loginFormFailType })

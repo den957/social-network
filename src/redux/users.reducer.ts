@@ -137,28 +137,26 @@ export const isFetchingUsers = (bool: boolean): IsFetchingUsersType => ({ type: 
 
 type ThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, ActionsType>
 
-export const getUsersFollowedTC = (count: number, page: number, follower: boolean): ThunkType => {
-   return async (dispatch) => {
+export const getUsersFollowedTC = (count: number, page: number, follower: boolean): ThunkType =>
+   async (dispatch) => {
       let data = await userApi.getUsers(count, page, follower)
       dispatch(getUsersFollowedSuccess(data.items, data.totalCount, page, follower))
    }
-}
 
-export const getUsersUnfollowedTC = (count: number, page: number, follower: boolean): ThunkType => {
-   return async (dispatch: any) => {
+export const getUsersUnfollowedTC = (count: number, page: number, follower: boolean): ThunkType =>
+   async dispatch => {
       let data = await userApi.getUsers(count, page, follower)
       page++
       dispatch(getUsersUnfollowedSuccess(data.items, data.totalCount, page, follower))
       dispatch(isFetchingUsers(false))
    }
-}
 export const getOnceUnfollowedTC = (): ThunkAction<void, AppReducerType, unknown, ActionsType> =>
    dispatch => {
       dispatch(getOnceUnfollowedSuccess())
       dispatch(isFetchingUsers(true))
    }
-export const unfollowUserTC = (userId: number): ThunkType => {
-   return async (dispatch) => {
+export const unfollowUserTC = (userId: number): ThunkType =>
+   async (dispatch) => {
       dispatch(setReadyToggle(true, userId))
       let data = await userApi.unfollow(userId)
       if (data.resultCode === 0) {
@@ -166,9 +164,8 @@ export const unfollowUserTC = (userId: number): ThunkType => {
          dispatch(setReadyToggle(false, userId))
       }
    }
-}
-export const followUserTC = (userId: number): ThunkType => {
-   return async (dispatch) => {
+export const followUserTC = (userId: number): ThunkType =>
+   async (dispatch) => {
       dispatch(setReadyToggle(true, userId))
       let data = await userApi.follow(userId)
       if (data.resultCode === 0) {
@@ -176,4 +173,3 @@ export const followUserTC = (userId: number): ThunkType => {
          dispatch(setReadyToggle(false, userId))
       }
    }
-}

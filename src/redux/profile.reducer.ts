@@ -1,3 +1,5 @@
+import { AppReducerType } from './store';
+import { ThunkAction } from "redux-thunk"
 import { profileApi } from "../api/api"
 import { InfoContactsPhotoType } from "../types/types"
 
@@ -38,8 +40,10 @@ const initialState = {
    profileStatus: null as string | null,
    profilePosts: [] as Array<PostType>
 }
+
 type InitialStateType = typeof initialState
-const profileReducer = (state = initialState, action: any): InitialStateType => {
+type ActionsType = GetProfileInfoSuccessType | SetProfileImageSuccessType | GetProfileStatusSuccess | GetProfileMeInfoSuccessType | AddProfilePost | RemoveProfilePost
+const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
       case getProfileInfoSuccessType: {
          return {
@@ -68,7 +72,7 @@ const profileReducer = (state = initialState, action: any): InitialStateType => 
       case addProfilePostType: {
          return {
             ...state,
-            ...state.profilePosts.push(action.dataPost) as any
+            ...state.profilePosts.push(action.dataPost) as {}
          }
       }
       case removeProfilePostType: {
@@ -107,7 +111,7 @@ type AddProfilePost = {
    type: typeof addProfilePostType,
    dataPost: PostType
 }
-type removeProfilePost = {
+type RemoveProfilePost = {
    type: typeof removeProfilePostType,
    id: string
 }
@@ -116,59 +120,48 @@ export const setProfileImageSuccess = (img: string): SetProfileImageSuccessType 
 export const getProfileStatusSuccess = (status: string): GetProfileStatusSuccess => ({ type: getProfileStatusSuccessType, status })
 export const getProfileMeInfoSuccess = (dataMe: InfoType): GetProfileMeInfoSuccessType => ({ type: getProfileMeInfoSuccessType, dataMe })
 export const addProfilePost = (dataPost: PostType): AddProfilePost => ({ type: addProfilePostType, dataPost })
-export const removeProfilePost = (id: string) => ({ type: removeProfilePostType, id })
+export const removeProfilePost = (id: string): RemoveProfilePost => ({ type: removeProfilePostType, id })
 
-export const getProfileInfo = (userId: number) => {
-   return (dispatch: any) => {
-      return profileApi.getProfile(userId).then((data) => {
-         dispatch(getProfileInfoSuccess(data))
-      })
+type ThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, ActionsType>
+
+export const getProfileInfo = (userId: number): ThunkType =>
+   async dispatch => {
+      let data = await profileApi.getProfile(userId)
+      dispatch(getProfileInfoSuccess(data))
    }
-}
-export const getProfileMeInfo = (userId: number) => {
-   return (dispatch: any) => {
-      return profileApi.getProfile(userId).then((data) => {
-         dispatch(getProfileMeInfoSuccess(data))
-      })
+export const getProfileMeInfo = (userId: number): ThunkType =>
+   async dispatch => {
+      let data = await profileApi.getProfile(userId)
+      dispatch(getProfileMeInfoSuccess(data))
    }
-}
-export const setProfileImage = (image: string) => {
-   return (dispatch: any) => {
-      profileApi.setImage(image).then((data) => {
-         if (data.resultCode === 0) {
-            let img = data.data.photos.small
-            dispatch(setProfileImageSuccess(img))
-         }
-      })
+export const setProfileImage = (image: string): ThunkType =>
+   async dispatch => {
+      let data = await profileApi.setImage(image)
+      if (data.resultCode === 0) {
+         dispatch(setProfileImageSuccess(data.data.photos.small))
+      }
    }
-}
-export const getProfileStatus = (userId: number) => {
-   return (dispatch: any) => {
-      profileApi.getStatus(userId).then((response) => {
-         if (!response.data) {
-            dispatch(getProfileStatusSuccess(response.data))
-         }
+export const getProfileStatus = (userId: number): ThunkType =>
+   async dispatch => {
+      let response = await profileApi.getStatus(userId)
+      if (!response.data) {
          dispatch(getProfileStatusSuccess(response.data))
-      })
+      }
+      dispatch(getProfileStatusSuccess(response.data))
    }
-}
-export const setProfileStatus = (status: string) => {
-   return (dispatch: any) => {
-      profileApi.setStatus(status).then((data) => {
-         console.log(data)
-         if (data.resultCode === 0) {
-            dispatch(getProfileStatusSuccess(status))
-         }
-      })
+export const setProfileStatus = (status: string): ThunkType =>
+   async dispatch => {
+      let data = await profileApi.setStatus(status)
+      console.log(data)
+      if (data.resultCode === 0) {
+         dispatch(getProfileStatusSuccess(status))
+      }
    }
-}
-export const setProfileContactInfo = (fullName: string, aboutMe: string, lookingForAJobDescription: string, isMarried: boolean, youtube: string, website: string, facebook: string, github: string, userId: number) => {
-   return (dispatch: any) => {
-      profileApi.setContactInfo(fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github).then((data) => {
-         if (data.resultCode === 0) {
-            dispatch(getProfileMeInfo(userId))
-            dispatch(getProfileInfo(userId))
-         }
-      })
+export const setProfileContactInfo = (fullName: string, aboutMe: string, lookingForAJobDescription: string, isMarried: boolean, youtube: string, website: string, facebook: string, github: string, userId: number): ThunkType =>
+   async dispatch => {
+      let data = await profileApi.setContactInfo(fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github)
+      if (data.resultCode === 0) {
+         dispatch(getProfileMeInfo(userId))
+         dispatch(getProfileInfo(userId))
+      }
    }
-}

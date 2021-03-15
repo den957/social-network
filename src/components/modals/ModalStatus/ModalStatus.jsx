@@ -6,9 +6,14 @@ import ModalStatusReduxForm from './ModalStatusForm'
 
 export const ModalStatus = (props) => {
    const onSubmit = (dataForm) => {
-      let status = dataForm.status
-      props.setProfileStatus(status)
-      props.editModalStatus(false)
+      if (Object.getOwnPropertyNames(dataForm).length > 0) {
+         props.setProfileStatus(dataForm.status)
+         props.editModalStatus(false)
+      }
+      else {
+         props.setProfileStatus('')
+         props.editModalStatus(false)
+      }
    }
    return (
       <div className={s.modalStatus} onClick={() => props.editModalStatus(false)}>

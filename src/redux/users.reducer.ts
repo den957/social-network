@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk'
-import { userApi } from '../api/api'
+import { ResultCode, userApi } from '../api/api'
 import { UsersType } from '../types/types'
 import { AppReducerType } from './store'
 
@@ -159,7 +159,7 @@ export const unfollowUserTC = (userId: number): ThunkType =>
    async (dispatch) => {
       dispatch(setReadyToggle(true, userId))
       let data = await userApi.unfollow(userId)
-      if (data.resultCode === 0) {
+      if (data.resultCode === ResultCode.Success) {
          dispatch(unfollowUserSuccess(userId))
          dispatch(setReadyToggle(false, userId))
       }
@@ -168,7 +168,7 @@ export const followUserTC = (userId: number): ThunkType =>
    async (dispatch) => {
       dispatch(setReadyToggle(true, userId))
       let data = await userApi.follow(userId)
-      if (data.resultCode === 0) {
+      if (data.resultCode === ResultCode.Success) {
          dispatch(followUserSuccess(userId))
          dispatch(setReadyToggle(false, userId))
       }

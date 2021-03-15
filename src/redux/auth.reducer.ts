@@ -1,6 +1,6 @@
 import { AppReducerType } from './store';
 import { ThunkAction } from 'redux-thunk'
-import { authApi } from '../api/api'
+import { authApi, ResultCode, ResultCodeCaptcha } from '../api/api'
 import { loginFormFailAC, LoginFormFailACType } from './login.reducer'
 
 
@@ -56,10 +56,10 @@ const setIsAuthAC = (login: string | null, id: number | null, email: string | nu
 const getCaptchaSuccess = (urlCaptcha: string | null, isCaptcha: boolean): GetCaptchaSuccessACType => ({ type: getCaptchaSuccessType, urlCaptcha, isCaptcha })
 
 type ThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, ActionsType>
-export const getInfoAuthTC = (): ThunkType =>
+export const getInfoAuthTC = (): ThunkAction<void, AppReducerType, unknown, ActionsType> =>
    async dispatch => {
       let data = await authApi.me()
-      if (data.resultCode === 0) {
+      if (data.resultCode === ResultCode.Success) {
          let [login, id, email, isAuth] = [data.data.login, data.data.id, data.data.email, true]
          dispatch(setIsAuthAC(login, id, email, isAuth))
          return id
@@ -68,11 +68,11 @@ export const getInfoAuthTC = (): ThunkType =>
 export const logInServerTC = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType =>
    async dispatch => {
       let data = await authApi.logIn(email, password, rememberMe, captcha)
-      if (data.resultCode === 0) {
+      if (data.resultCode === ResultCode.Success) {
          dispatch(getInfoAuthTC())
          dispatch(getCaptchaSuccess(null, false))
       }
-      else if (data.resultCode === 10) {
+      else if (data.resultCode === ResultCodeCaptcha.Captcha) {
          dispatch(getCaptchaTC())
          dispatch(loginFormFailAC())
       }
@@ -83,14 +83,13 @@ export const logInServerTC = (email: string, password: string, rememberMe: boole
 export const logOutServerTC = (): ThunkType =>
    async dispatch => {
       let data = await authApi.logOut()
-      if (data.resultCode === 0) {
+      if (data.resultCode === ResultCode.Success) {
          dispatch(setIsAuthAC(null, null, null, false))
       }
    }
 export const getCaptchaTC = (): ThunkType =>
    async dispatch => {
       let data = await authApi.getCaptcha()
-      let urlCaptcha = data.url
-      dispatch(getCaptchaSuccess(urlCaptcha, true))
+      dispatch(getCaptchaSuccess(data.url, true))
    }
 export default authReducer

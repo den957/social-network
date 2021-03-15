@@ -1,6 +1,6 @@
 import { AppReducerType } from './store';
 import { ThunkAction } from "redux-thunk"
-import { profileApi } from "../api/api"
+import { profileApi, ResultCode } from "../api/api"
 import { InfoContactsPhotoType } from "../types/types"
 
 const getProfileInfoSuccessType = 'GET_PROFILE_INFO_SUCCESS'
@@ -18,7 +18,7 @@ type InfoContactsType = {
    youtube: string,
    mainLink: string
 }
-type InfoType = {
+export type InfoType = {
    userId: number,
    lookingForAJob: boolean,
    lookingForAJobDescription: string,
@@ -37,7 +37,7 @@ const initialState = {
    profileMeInfo: null as InfoType | null,
    profileInfo: null as InfoType | null,
    profileImage: null as string | null,
-   profileStatus: null as string | null,
+   profileStatus: '' as string,
    profilePosts: [] as Array<PostType>
 }
 
@@ -137,7 +137,7 @@ export const getProfileMeInfo = (userId: number): ThunkType =>
 export const setProfileImage = (image: string): ThunkType =>
    async dispatch => {
       let data = await profileApi.setImage(image)
-      if (data.resultCode === 0) {
+      if (data.resultCode === ResultCode.Success) {
          dispatch(setProfileImageSuccess(data.data.photos.small))
       }
    }
@@ -152,15 +152,14 @@ export const getProfileStatus = (userId: number): ThunkType =>
 export const setProfileStatus = (status: string): ThunkType =>
    async dispatch => {
       let data = await profileApi.setStatus(status)
-      console.log(data)
-      if (data.resultCode === 0) {
+      if (data.resultCode === ResultCode.Success) {
          dispatch(getProfileStatusSuccess(status))
       }
    }
 export const setProfileContactInfo = (fullName: string, aboutMe: string, lookingForAJobDescription: string, isMarried: boolean, youtube: string, website: string, facebook: string, github: string, userId: number): ThunkType =>
    async dispatch => {
       let data = await profileApi.setContactInfo(fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github)
-      if (data.resultCode === 0) {
+      if (data.resultCode === ResultCode.Success) {
          dispatch(getProfileMeInfo(userId))
          dispatch(getProfileInfo(userId))
       }

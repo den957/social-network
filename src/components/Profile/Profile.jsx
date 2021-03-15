@@ -70,9 +70,16 @@ const Profile = (props) => {
                      <h4>{props.profileInfo.fullName}</h4>
                   </div>
                   {props.isOwner
-                     ? <div className={s.infoProfile__status} >
-                        <div onClick={(e) => { props.editModalStatus(true) }}>{props.profileStatus}</div>
-                     </div>
+                     ? <>
+                        {props.profileStatus
+                           ? <div className={s.infoProfile__status} >
+                              <div onClick={(e) => { props.editModalStatus(true) }}>{props.profileStatus}</div>
+                           </div>
+                           : <div className={s.infoProfile__status} >
+                              <div className={s.infoProfile__fakeStatus} onClick={(e) => { props.editModalStatus(true) }}>status</div>
+                           </div>
+                        }
+                     </>
                      : <>
                         {props.profileStatus
                            ? <div className={s.statusProfile__user}>

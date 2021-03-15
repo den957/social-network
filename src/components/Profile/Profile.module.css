@@ -147,6 +147,9 @@
    padding: 0.3em 0.1em;
    margin-bottom: 0.4em;
 }
+.infoProfile__fakeStatus {
+   color:#a0a0a0;
+}
 .infoProfile__status:hover {
    background-color: #e8e7e5;
    cursor: pointer;

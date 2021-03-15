@@ -3,14 +3,14 @@ import s from './Users.module.css'
 import { connect } from 'react-redux'
 import { AppReducerType } from '../../redux/store'
 import { getUsersFollowedTC, unfollowUserTC } from '../../redux/users.reducer'
-import { ReadyToggleType, UsersType } from '../../types/types'
+import { UsersType } from '../../types/types'
 import PreloaderLine from '../Common/Preloader/PreloaderLine/PreloaderLine'
 import Users from './Users'
 
 type MapStateToPropsType = {
    isAuth: boolean,
    usersFollowed: Array<UsersType>,
-   readyToggle: Array<ReadyToggleType>,
+   readyToggle: Array<number>,
    totalCount: number | null,
    countFollowed: number,
    pageFollowed: number,

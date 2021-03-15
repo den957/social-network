@@ -5,12 +5,12 @@ import { NavLink } from 'react-router-dom'
 import userIcon from '../../assets/images/userIcon.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserMinus } from '@fortawesome/free-solid-svg-icons'
-import { ReadyToggleType, UsersType } from '../../types/types'
+import { UsersType } from '../../types/types'
 
 type PropsType = {
    isAuth: boolean,
    usersFollowed: Array<UsersType>,
-   readyToggle: Array<ReadyToggleType>,
+   readyToggle: Array<number>,
    totalCount: number | null,
    countFollowed: number,
    pageFollowed: number,
@@ -51,7 +51,7 @@ const Users: React.FC<PropsType> = ({ isAuth, usersFollowed, readyToggle, unfoll
                                     <div className={s.navigationUsers__row}>
                                        <NavLink className={s.navigationUsers__message} to={'/messages'}>Write a message</NavLink>
                                        <div className={s.navigationUsers__subscribe}>
-                                          <button disabled={readyToggle.some((userId) => Number(userId) === user.id)} onClick={(e) => { unfollowUserTC(user.id) }}><FontAwesomeIcon icon={faUserMinus} /></button>
+                                          <button disabled={readyToggle.some((userId) => userId === user.id)} onClick={(e) => { unfollowUserTC(user.id) }}><FontAwesomeIcon icon={faUserMinus} /></button>
                                        </div>
                                     </div>
                                  </div>

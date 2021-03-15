@@ -9,7 +9,3 @@ export type UsersType = {
    photos: InfoContactsPhotoType,
    followed: boolean
 }
-export type ReadyToggleType = {
-   value: boolean,
-   userId: number
-}

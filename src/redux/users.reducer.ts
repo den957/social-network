@@ -1,5 +1,7 @@
+import { ThunkAction } from 'redux-thunk'
 import { userApi } from '../api/api'
-import { ReadyToggleType, UsersType } from '../types/types'
+import { UsersType } from '../types/types'
+import { AppReducerType } from './store'
 
 const getUsersFollowedSuccessType = "GET_USERS_FOLLOWED__SUCCESS"
 const getUsersUnfollowedSuccessType = "GET_USERS_UNFOLLOWED__SUCCESS"
@@ -10,19 +12,20 @@ const setReadyToggleType = 'SET_READY_TOGGLE'
 const isFetchingUsersType = 'IS_FETCHING_USERS'
 
 const initialState = {
-   countFollowed: 5, //count of items on one portion
-   countUnfollowed: 24,
+   countFollowed: 5, //count of items on one portion in Users component
+   countUnfollowed: 24,//count of items on one portion in UsersAll component
    pageFollowed: 1, //number of touched portions; default:1
-   usersFollowed: [] as Array<UsersType>,
-   usersUnfollowed: [] as Array<UsersType>,
-   pageUnfollowed: 1,
+   pageUnfollowed: 1, //number of touched portions; default:1
+   usersFollowed: [] as Array<UsersType>, //data of users in Users component
+   usersUnfollowed: [] as Array<UsersType>, //data of users in UsersAll component
    totalCount: null as number | null, //count all of items 
    isReadyPage: false, //all thunks in container are finished
-   readyToggle: [] as Array<ReadyToggleType>,
-   isFetching: false
+   readyToggle: [] as Array<number>, //array of id users 
+   isFetching: false // are we ready to call new request for UsersAll data
 }
 type InitialStateType = typeof initialState
-const usersReducer = (state = initialState, action: any): InitialStateType => {
+type ActionsType = GetUserFollowedSuccessType | GetUserUnfollowedSuccessType | GetOnceUnfollowedSuccessType | UnfollowUserSuccessType | FollowUserSuccessType | SetReadyToggleType | IsFetchingUsersType
+const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
       case getUsersFollowedSuccessType: {
          return {
@@ -36,7 +39,7 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
       case getUsersUnfollowedSuccessType: {
          return {
             ...state,
-            ...state.usersUnfollowed.push(...action.usersUnfollowed) as any,
+            ...state.usersUnfollowed.push(...action.usersUnfollowed) as {},
             pageUnfollowed: action.pageUnfollowed,
             totalCount: action.totalCount,
          }
@@ -92,14 +95,14 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
 export default usersReducer
 type GetUserFollowedSuccessType = {
    type: typeof getUsersFollowedSuccessType,
-   usersFollowed: UsersType,
+   usersFollowed: Array<UsersType>,
    totalCount: number,
    pageFollowed: number,
    follower: boolean
 }
 type GetUserUnfollowedSuccessType = {
    type: typeof getUsersUnfollowedSuccessType,
-   usersUnfollowed: UsersType,
+   usersUnfollowed: Array<UsersType>,
    totalCount: number,
    pageUnfollowed: number,
    follower: boolean
@@ -124,64 +127,53 @@ type IsFetchingUsersType = {
    type: typeof isFetchingUsersType,
    bool: boolean
 }
-const getUsersFollowedSuccess = (usersFollowed: UsersType, totalCount: number, pageFollowed: number, follower: boolean): GetUserFollowedSuccessType => ({ type: getUsersFollowedSuccessType, usersFollowed, totalCount, pageFollowed, follower })
-const getUsersUnfollowedSuccess = (usersUnfollowed: UsersType, totalCount: number, pageUnfollowed: number, follower: boolean): GetUserUnfollowedSuccessType => ({ type: getUsersUnfollowedSuccessType, usersUnfollowed, totalCount, pageUnfollowed, follower })
+const getUsersFollowedSuccess = (usersFollowed: Array<UsersType>, totalCount: number, pageFollowed: number, follower: boolean): GetUserFollowedSuccessType => ({ type: getUsersFollowedSuccessType, usersFollowed, totalCount, pageFollowed, follower })
+const getUsersUnfollowedSuccess = (usersUnfollowed: Array<UsersType>, totalCount: number, pageUnfollowed: number, follower: boolean): GetUserUnfollowedSuccessType => ({ type: getUsersUnfollowedSuccessType, usersUnfollowed, totalCount, pageUnfollowed, follower })
 const getOnceUnfollowedSuccess = (): GetOnceUnfollowedSuccessType => ({ type: getOnceUnfollowedSuccessType })
 const unfollowUserSuccess = (userId: number): UnfollowUserSuccessType => ({ type: unfollowUserSuccessType, userId })
 const followUserSuccess = (userId: number): FollowUserSuccessType => ({ type: followUserSuccessType, userId })
 const setReadyToggle = (value: boolean, userId: number): SetReadyToggleType => ({ type: setReadyToggleType, value, userId })
 export const isFetchingUsers = (bool: boolean): IsFetchingUsersType => ({ type: isFetchingUsersType, bool })
 
-export const getUsersFollowedTC = (count: number, page: number, follower: boolean) => {
-   return (dispatch: any) => {
-      userApi.getUsers(count, page, follower)
-         .then((data) => {
-            const users = data.items
-            let totalCount = data.totalCount
-            dispatch(getUsersFollowedSuccess(users, totalCount, page, follower))
-         })
+type ThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, ActionsType>
+
+export const getUsersFollowedTC = (count: number, page: number, follower: boolean): ThunkType => {
+   return async (dispatch) => {
+      let data = await userApi.getUsers(count, page, follower)
+      dispatch(getUsersFollowedSuccess(data.items, data.totalCount, page, follower))
    }
 }
 
-export const getUsersUnfollowedTC = (count: number, page: number, follower: boolean) => {
-   return (dispatch: any) => {
-      userApi.getUsers(count, page, follower)
-         .then((data) => {
-            page++
-            dispatch(getUsersUnfollowedSuccess(data.items, data.totalCount, page, follower))
-         })
-         .finally(() => {
-            dispatch(isFetchingUsers(false))
-         })
+export const getUsersUnfollowedTC = (count: number, page: number, follower: boolean): ThunkType => {
+   return async (dispatch: any) => {
+      let data = await userApi.getUsers(count, page, follower)
+      page++
+      dispatch(getUsersUnfollowedSuccess(data.items, data.totalCount, page, follower))
+      dispatch(isFetchingUsers(false))
    }
 }
-export const getOnceUnfollowedTC = () => {
-   return (dispatch: any) => {
+export const getOnceUnfollowedTC = (): ThunkAction<void, AppReducerType, unknown, ActionsType> =>
+   dispatch => {
       dispatch(getOnceUnfollowedSuccess())
       dispatch(isFetchingUsers(true))
    }
-}
-export const unfollowUserTC = (userId: number) => {
-   return (dispatch: any) => {
+export const unfollowUserTC = (userId: number): ThunkType => {
+   return async (dispatch) => {
       dispatch(setReadyToggle(true, userId))
-      userApi.unfollow(userId)
-         .then((data) => {
-            if (data.resultCode === 0) {
-               dispatch(unfollowUserSuccess(userId))
-               dispatch(setReadyToggle(false, userId))
-            }
-         })
+      let data = await userApi.unfollow(userId)
+      if (data.resultCode === 0) {
+         dispatch(unfollowUserSuccess(userId))
+         dispatch(setReadyToggle(false, userId))
+      }
    }
 }
-export const followUserTC = (userId: number) => {
-   return (dispatch: any) => {
+export const followUserTC = (userId: number): ThunkType => {
+   return async (dispatch) => {
       dispatch(setReadyToggle(true, userId))
-      userApi.follow(userId)
-         .then((data) => {
-            if (data.resultCode === 0) {
-               dispatch(followUserSuccess(userId))
-               dispatch(setReadyToggle(false, userId))
-            }
-         })
+      let data = await userApi.follow(userId)
+      if (data.resultCode === 0) {
+         dispatch(followUserSuccess(userId))
+         dispatch(setReadyToggle(false, userId))
+      }
    }
 }

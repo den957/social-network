@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom'
 import PreloaderLine from '../../Common/Preloader/PreloaderLine/PreloaderLine'
-import { ReadyToggleType, UsersType } from '../../../types/types'
+import { UsersType } from '../../../types/types'
 
 type PropsType = {
    isAuth: boolean,
    usersUnfollowed: Array<UsersType>,
-   readyToggle: Array<ReadyToggleType>,
+   readyToggle: Array<number>,
    followUserTC: (userId: number) => void,
 }
 export const UsersAll: React.FC<PropsType> = ({ usersUnfollowed, isAuth, readyToggle, followUserTC }) => {
@@ -38,7 +38,7 @@ export const UsersAll: React.FC<PropsType> = ({ usersUnfollowed, isAuth, readyTo
                               </NavLink>
                               <div className={s.bodyUsersAll__subscribe}>
                                  {!user.followed && isAuth
-                                    ? <button className={s.bodyUsersAll__abled} disabled={readyToggle.some((userId) => Number(userId) === user.id)} onClick={(e) => { followUserTC(user.id) }}><FontAwesomeIcon icon={faUserPlus} /></button>
+                                    ? <button className={s.bodyUsersAll__abled} disabled={readyToggle.some((userId) => userId === user.id)} onClick={(e) => { followUserTC(user.id) }}><FontAwesomeIcon icon={faUserPlus} /></button>
                                     : <button className={s.bodyUsersAll__disabled} disabled={true}><FontAwesomeIcon icon={faUserPlus} /></button>
                                  }
                               </div>

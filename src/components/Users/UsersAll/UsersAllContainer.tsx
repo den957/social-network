@@ -6,6 +6,8 @@ import Preloader from '../../Common/Preloader/Preloader'
 import { UsersType } from '../../../types/types'
 import { AppReducerType } from '../../../redux/store'
 import { UsersAll } from './UsersAll'
+import { ThunkDispatch } from 'redux-thunk'
+import { AnyAction } from 'redux'
 
 type MapStateToPropsType = {
    isAuth: boolean,
@@ -72,7 +74,7 @@ const mapStateToProps = (state: AppReducerType): MapStateToPropsType => {
       isAuth: state.auth.isAuth
    }
 }
-const mapDispatchToProps = (dispatch: any): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>): MapDispatchToPropsType => {
    return {
       getUsersUnfollowedTC: (count: number, pageUnfollowed: number, follower: boolean): void => { dispatch(getUsersUnfollowedTC(count, pageUnfollowed, follower)) },
       isFetchingUsers: (bool: boolean): void => { dispatch(isFetchingUsers(bool)) },

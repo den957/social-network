@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import s from './SettingsForm.module.css'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+import { DataContactType } from './Settings'
 import { minLengthCreator, required, validUrlFormat, validDateFormat } from '../../validators/validators'
 import { Input } from '../Common/FormControl/FormControl'
 
 const minLength8 = minLengthCreator(8)
 const validUrl = validUrlFormat()
 const validDate = validDateFormat()
-const SettingsForm: React.StatelessComponent<InjectedFormProps<{}>> = ({ handleSubmit }) => {
+const SettingsForm: React.FC<InjectedFormProps<DataContactType>> = ({ handleSubmit }) => {
    const [activeCheckbox, setActiveCheckbox] = useState<string>(`${s.bodySettings__checkbox}`)
    const [checked, setChecked] = useState<boolean>(false)
    return (
@@ -70,4 +71,4 @@ const SettingsForm: React.StatelessComponent<InjectedFormProps<{}>> = ({ handleS
       </form>
    )
 }
-export const SettingsReduxForm = reduxForm({ form: 'settings' })(SettingsForm)
+export const SettingsReduxForm = reduxForm<DataContactType>({ form: 'settings' })(SettingsForm)

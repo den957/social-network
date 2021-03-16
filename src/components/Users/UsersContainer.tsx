@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { Dispatch, useEffect } from 'react'
 import s from './Users.module.css'
 import { connect } from 'react-redux'
 import { AppReducerType } from '../../redux/store'
@@ -6,6 +6,8 @@ import { getUsersFollowedTC, unfollowUserTC } from '../../redux/users.reducer'
 import { UsersType } from '../../types/types'
 import PreloaderLine from '../Common/Preloader/PreloaderLine/PreloaderLine'
 import Users from './Users'
+import { AnyAction } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
 
 type MapStateToPropsType = {
    isAuth: boolean,
@@ -55,7 +57,7 @@ const mapStateToProps = (state: AppReducerType): MapStateToPropsType => {
       isAuth: state.auth.isAuth
    }
 }
-const mapDispatchToProps = (dispatch: any): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>): MapDispatchToPropsType => {
    return {
       getUsersFollowedTC: (count: number, pageFollowed: number, follower: boolean) => { dispatch(getUsersFollowedTC(count, pageFollowed, follower)) },
       unfollowUserTC: (userId: number) => { dispatch(unfollowUserTC(userId)) }

@@ -6,8 +6,10 @@ import { setProfileContactInfo } from '../../redux/profile.reducer'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import { Redirect } from 'react-router-dom'
 import { AppReducerType } from '../../redux/store'
+import { ThunkDispatch } from 'redux-thunk'
+import { AnyAction } from 'redux'
 
-type DataContactType = {
+export type DataContactType = {
    fullName: string,
    aboutMe: string,
    lookingForAJobDescription: string,
@@ -27,8 +29,7 @@ type PropsType = MapDispatchToProps & MapStateToProps
 
 export const Settings: React.FC<PropsType> = ({ userId, setProfileContactInfo }) => {
    const [isLoad, setIsLoad] = useState<boolean>(false)
-   const onSubmit: any = (dataContact: DataContactType): void => {
-      console.log(dataContact)
+   const onSubmit = (dataContact: DataContactType): void => {
       const
          [
             fullName,
@@ -51,7 +52,7 @@ export const Settings: React.FC<PropsType> = ({ userId, setProfileContactInfo })
                dataContact.website,
                userId
             ]
-      setProfileContactInfo(fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github, userId)
+      setProfileContactInfo(fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github, id)
       setIsLoad(true)
    }
    if (isLoad) {
@@ -73,9 +74,27 @@ const mapStateToProps = (state: AppReducerType): MapStateToProps => {
       userId: state.auth.id,
    }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>): MapDispatchToProps => {
    return {
-      setProfileContactInfo: (fullName: string, aboutMe: string, lookingForAJobDescription: string, isMarried: boolean, youtube: string, website: string, facebook: string, github: string, userId: number): void => { dispatch(setProfileContactInfo(fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github, userId)) }
+      setProfileContactInfo: (fullName: string,
+         aboutMe: string,
+         lookingForAJobDescription: string,
+         isMarried: boolean,
+         youtube: string,
+         website: string,
+         facebook: string,
+         github: string,
+         userId: number | null): void => {
+         dispatch(setProfileContactInfo(fullName,
+            aboutMe,
+            lookingForAJobDescription,
+            isMarried,
+            youtube,
+            website,
+            facebook,
+            github,
+            userId))
+      }
    }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(Settings))

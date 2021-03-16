@@ -156,11 +156,13 @@ export const setProfileStatus = (status: string): ThunkType =>
          dispatch(getProfileStatusSuccess(status))
       }
    }
-export const setProfileContactInfo = (fullName: string, aboutMe: string, lookingForAJobDescription: string, isMarried: boolean, youtube: string, website: string, facebook: string, github: string, userId: number): ThunkType =>
+export const setProfileContactInfo = (fullName: string, aboutMe: string, lookingForAJobDescription: string, isMarried: boolean, youtube: string, website: string, facebook: string, github: string, userId: number | null): ThunkType =>
    async dispatch => {
       let data = await profileApi.setContactInfo(fullName, aboutMe, lookingForAJobDescription, isMarried, youtube, website, facebook, github)
       if (data.resultCode === ResultCode.Success) {
-         dispatch(getProfileMeInfo(userId))
-         dispatch(getProfileInfo(userId))
+         if (userId != null) {
+            dispatch(getProfileMeInfo(userId))
+            dispatch(getProfileInfo(userId))
+         }
       }
    }

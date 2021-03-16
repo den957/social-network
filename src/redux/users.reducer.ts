@@ -24,7 +24,7 @@ const initialState = {
    isFetching: false // are we ready to call new request for UsersAll data
 }
 type InitialStateType = typeof initialState
-type ActionsType = GetUserFollowedSuccessType | GetUserUnfollowedSuccessType | GetOnceUnfollowedSuccessType | UnfollowUserSuccessType | FollowUserSuccessType | SetReadyToggleType | IsFetchingUsersType
+export type ActionsType = GetUserFollowedSuccessType | GetUserUnfollowedSuccessType | GetOnceUnfollowedSuccessType | UnfollowUserSuccessType | FollowUserSuccessType | SetReadyToggleType | IsFetchingUsersType
 const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
       case getUsersFollowedSuccessType: {

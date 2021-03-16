@@ -2,14 +2,6 @@ import { InfoType } from './../redux/profile.reducer';
 import { UsersType } from './../types/types';
 import axios from 'axios'
 
-
-const instance = axios.create({
-   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-   withCredentials: true,
-   headers: {
-      "API-KEY": "f2f743b9-9231-4544-9bd3-51aae1b3e9f4"
-   }
-})
 export enum ResultCode {
    Success = 0,
    Failure = 1
@@ -17,7 +9,18 @@ export enum ResultCode {
 export enum ResultCodeCaptcha {
    Captcha = 10
 }
-
+type DataResponseType = {
+   resultCode: ResultCode
+   messages: Array<string>,
+   data: {}
+}
+const instance = axios.create({
+   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+   withCredentials: true,
+   headers: {
+      "API-KEY": "f2f743b9-9231-4544-9bd3-51aae1b3e9f4"
+   }
+})
 type MeResponseType = {
    data: { id: number, email: string, login: string }
    resultCode: ResultCode,
@@ -29,11 +32,6 @@ type LoginResponseType = {
    data: {
       userId: number
    }
-}
-type LogOutResponseType = {
-   resultCode: ResultCode
-   messages: Array<string>,
-   data: object
 }
 type GetCaptchaResponseType = {
    url: string
@@ -47,7 +45,7 @@ export const authApi = {
          .then(response => response.data)
    },
    logOut() {
-      return instance.delete<LogOutResponseType>('auth/login')
+      return instance.delete<DataResponseType>('auth/login')
          .then(response => response.data)
    },
    getCaptcha() {
@@ -58,17 +56,7 @@ export const authApi = {
 type GetUsersResponseType = {
    items: Array<UsersType>,
    totalCount: number,
-   error: null
-}
-type UnfollowResponseType = {
-   resultCode: ResultCode
-   messages: Array<string>,
-   data: object
-}
-type FollowResponseType = {
-   resultCode: ResultCode
-   messages: Array<string>,
-   data: object
+   error: string
 }
 export const userApi = {
    getUsers(count: number, page: number, follower: boolean) {
@@ -76,11 +64,11 @@ export const userApi = {
          .then(response => response.data)
    },
    unfollow(userId: number) {
-      return instance.delete<UnfollowResponseType>(`/follow/${userId}`)
+      return instance.delete<DataResponseType>(`/follow/${userId}`)
          .then(response => response.data)
    },
    follow(userId: number) {
-      return instance.post<FollowResponseType>(`/follow/${userId}`)
+      return instance.post<DataResponseType>(`/follow/${userId}`)
          .then(response => response.data)
    }
 }
@@ -94,16 +82,6 @@ type SetImageResponseType = {
          large: string
       }
    }
-}
-type SetStatus = {
-   resultCode: ResultCode,
-   messages: Array<string>,
-   data: object
-}
-type SetContactInfo = {
-   resultCode: ResultCode
-   messages: Array<string>,
-   data: object
 }
 export const profileApi = {
    getProfile(userId: number) {
@@ -123,11 +101,11 @@ export const profileApi = {
       return instance.get<string>(`/profile/status/${userId}`)
    },
    setStatus(status: string) {
-      return instance.put<SetStatus>('/profile/status', { status })
+      return instance.put<DataResponseType>('/profile/status', { status })
          .then(response => response.data)
    },
    setContactInfo(fullName: string, aboutMe: string, lookingForAJobDescription: string, lookingForAJob: boolean, youtube: string, website: string, facebook: string, github: string) {
-      return instance.put<SetContactInfo>('/profile', {
+      return instance.put<DataResponseType>('/profile', {
          fullName: fullName,
          aboutMe: aboutMe,
          lookingForAJobDescription: lookingForAJobDescription,

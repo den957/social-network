@@ -54,13 +54,25 @@ export const ProfileContainer: React.FC<PropsType> = ({ match, history, userId, 
 
    return (
       <>
-         {props.profileInfo && props.profileMeInfo
-            ? <Profile removeProfilePost={props.removeProfilePost} profilePosts={props.profilePosts} addProfilePost={props.addProfilePost} profileMeInfo={props.profileMeInfo} editModalStatus={props.editModalStatus} profileInfo={props.profileInfo} setProfileImage={props.setProfileImage} isOwner={!match.params.userId} profileStatus={props.profileStatus} isAuth={props.isAuth} />
-            : <div className={s.preloader__profileWrapper}>
-               <div className={s.preloader__profileBlock}>
-                  <Preloader />
-               </div>
-            </div >
+         {props.isAuth
+            ?
+            <>{
+               props.profileInfo && props.profileMeInfo
+                  ? <Profile removeProfilePost={props.removeProfilePost} profilePosts={props.profilePosts} addProfilePost={props.addProfilePost} profileMeInfo={props.profileMeInfo} editModalStatus={props.editModalStatus} profileInfo={props.profileInfo} setProfileImage={props.setProfileImage} isOwner={!match.params.userId} profileStatus={props.profileStatus} isAuth={props.isAuth} />
+                  : <div className={s.preloader__profileWrapper}>
+                     <div className={s.preloader__profileBlock}>
+                        <Preloader />
+                     </div>
+                  </div >
+            }</>
+            : <>{props.profileInfo
+               ? <Profile removeProfilePost={props.removeProfilePost} profilePosts={props.profilePosts} addProfilePost={props.addProfilePost} profileMeInfo={props.profileMeInfo as InfoType} editModalStatus={props.editModalStatus} profileInfo={props.profileInfo} setProfileImage={props.setProfileImage} isOwner={!match.params.userId} profileStatus={props.profileStatus} isAuth={props.isAuth} />
+               : <div className={s.preloader__profileWrapper}>
+                  <div className={s.preloader__profileBlock}>
+                     <Preloader />
+                  </div>
+               </div >
+            }</>
          }
       </>
    )

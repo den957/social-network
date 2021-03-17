@@ -46,7 +46,7 @@ const UserAllContainer: React.FC<PropsType> = ({ isFetchingUsers, pageUnfollowed
       }
    }, [])
    const scrollHandler = (e: any): void => {
-      const [scrollHeight, scrollTop, innerHeight] = [e.target.documentElement.scrollHeight as number, e.target.documentElement.scrollTop as number, window.innerHeight as number]
+      const [scrollHeight, scrollTop, innerHeight] = [e.target.documentElement.scrollHeight, e.target.documentElement.scrollTop, window.innerHeight]
       if (scrollTop + 100 >= scrollHeight - innerHeight) {
          isFetchingUsers(true)
       }

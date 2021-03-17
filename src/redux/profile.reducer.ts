@@ -10,26 +10,26 @@ const getProfileMeInfoSuccessType = 'GET_PROFILE_ME_INFO_SUCCESS'
 const addProfilePostType = "ADD_PROFILE_POST_TYPE"
 const removeProfilePostType = "REMOVE_PROFILE_POST_TYPE"
 
-type InfoContactsType = {
-   github: string,
-   facebook: string,
-   twitter: string,
-   website: string,
-   youtube: string,
-   mainLink: string
-}
 export type InfoType = {
    userId: number,
    lookingForAJob: boolean,
    lookingForAJobDescription: string,
    fullName: string,
-   contacts: InfoContactsType,
+   aboutMe: string
+   contacts: {
+      github: string,
+      facebook: string,
+      twitter: string,
+      website: string,
+      youtube: string,
+      mainLink: string
+   },
    photos: InfoContactsPhotoType
 
 }
-type PostType = {
+export type PostType = {
    id: string,
-   data: string,
+   date: string,
    post: string
 }
 
@@ -134,7 +134,7 @@ export const getProfileMeInfo = (userId: number): ThunkType =>
       let data = await profileApi.getProfile(userId)
       dispatch(getProfileMeInfoSuccess(data))
    }
-export const setProfileImage = (image: string): ThunkType =>
+export const setProfileImage = (image: File): ThunkType =>
    async dispatch => {
       let data = await profileApi.setImage(image)
       if (data.resultCode === ResultCode.Success) {

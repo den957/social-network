@@ -1,3 +1,4 @@
+/*---Input---*/
 .input__validate > input{
    border: 1px solid red;
    width:75%;
@@ -7,4 +8,14 @@
    position: relative;
    left:0.5em;
    font-size: 0.8rem;
+}
+/*---AutoHeightTextarea---*/
+.addPost__textarea {
+   width:100%;
+   height:0px;
+   overflow:hidden;
+   resize: none;
+   padding:0.4em 2em 0em 0.5em;
+   font-size: 0.9rem;
+
 }

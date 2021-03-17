@@ -88,7 +88,7 @@ export const profileApi = {
       return instance.get<GetProfileResponseType>(`/profile/${userId}`)
          .then(response => response.data)
    },
-   setImage(image: string) {
+   setImage(image: File) {
       const formData = new FormData()
       formData.append('image', image)
       return instance.post<SetImageResponseType>('/profile/photo', formData, {

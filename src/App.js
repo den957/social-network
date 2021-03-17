@@ -11,7 +11,7 @@ import ModalStatus from './components/modals/ModalStatus/ModalStatus';
 import Header from './components/Header/Header';
 import { withSuspense } from './hoc/withSuspense';
 
-const ProfileContainerLazy = React.lazy(() => { return import('./components/Profile/Profile') })
+const ProfileContainerLazy = React.lazy(() => { return import('./components/Profile/ProfileContainer') })
 const UsersContainerLazy = React.lazy(() => { return import('./components/Users/UsersContainer') })
 const LoginContainerLazy = React.lazy(() => { return import('./components/Login/Login') })
 const UsersAllContainerLazy = React.lazy(() => { return import('./components/Users/UsersAll/UsersAllContainer') })

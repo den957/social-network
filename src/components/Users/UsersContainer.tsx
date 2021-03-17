@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import s from './Users.module.css'
 import { connect } from 'react-redux'
 import { AppReducerType } from '../../redux/store'

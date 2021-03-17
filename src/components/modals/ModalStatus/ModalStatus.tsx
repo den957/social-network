@@ -16,7 +16,7 @@ type MapDispatchToProps = {
    setProfileStatus: (status: string) => void
 }
 type OwnProps = {
-   editModalStatus: (text: boolean) => void
+   editModalStatus: (text: boolean) => void,
 }
 type PropsType = MapStateToProps & MapDispatchToProps & OwnProps
 export const ModalStatus: React.FC<PropsType> = ({ editModalStatus, setProfileStatus, ...props }) => {

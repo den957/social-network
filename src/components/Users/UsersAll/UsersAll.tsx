@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom'
 import PreloaderLine from '../../Common/Preloader/PreloaderLine/PreloaderLine'
-import { UsersType } from '../../../types/types'
+import { UsersType } from '../../../redux/users.reducer'
 
 type PropsType = {
    isAuth: boolean,

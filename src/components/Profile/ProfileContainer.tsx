@@ -27,9 +27,7 @@ type MapDispatchToPropsType = {
    removeProfilePost: (id: string) => void,
 }
 type OwnPropsType = {
-   editModalStatus: (el: boolean) => void,
-   setModalPost: (el: boolean) => void,
-   modalPost: boolean,
+   editModalStatus: (el: boolean) => void
 }
 type MathParamsType = {
    userId: string
@@ -57,7 +55,7 @@ export const ProfileContainer: React.FC<PropsType> = ({ match, history, userId, 
    return (
       <>
          {props.profileInfo && props.profileMeInfo
-            ? <Profile removeProfilePost={props.removeProfilePost} modalPost={props.modalPost} setModalPost={props.setModalPost} profilePosts={props.profilePosts} addProfilePost={props.addProfilePost} profileMeInfo={props.profileMeInfo} editModalStatus={props.editModalStatus} profileInfo={props.profileInfo} setProfileImage={props.setProfileImage} isOwner={!match.params.userId} profileStatus={props.profileStatus} isAuth={props.isAuth} />
+            ? <Profile removeProfilePost={props.removeProfilePost} profilePosts={props.profilePosts} addProfilePost={props.addProfilePost} profileMeInfo={props.profileMeInfo} editModalStatus={props.editModalStatus} profileInfo={props.profileInfo} setProfileImage={props.setProfileImage} isOwner={!match.params.userId} profileStatus={props.profileStatus} isAuth={props.isAuth} />
             : <div className={s.preloader__profileWrapper}>
                <div className={s.preloader__profileBlock}>
                   <Preloader />

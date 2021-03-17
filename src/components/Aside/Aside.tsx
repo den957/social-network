@@ -4,8 +4,9 @@ import cn from 'classnames'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faComment, faUsers, faCogs } from '@fortawesome/free-solid-svg-icons'
+
 // create aside block with links
-const Aside = () => {
+const Aside: React.FC = () => {
    return (
       <div className={s.aside__menu}>
          <NavLink className={s.aside__item} to={'/profile'}><FontAwesomeIcon icon={faUser} className={cn(s.aside__icon, s.iconAside__profile)} /> <span className={s.aside__name}>Profile</span></NavLink>

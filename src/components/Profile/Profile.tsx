@@ -20,8 +20,6 @@ type PropsType = {
    profileMeInfo: InfoType,
    profilePosts: Array<PostType>,
    removeProfilePost: (id: string) => void,
-   modalPost: boolean,
-   setModalPost: (el: boolean) => void
 }
 const Profile: React.FC<PropsType> = ({ setProfileImage, addProfilePost, profileInfo, isOwner, profileStatus, editModalStatus, isAuth, ...props }) => {
    const [modalPost, setModalPost] = useState<boolean>(false)

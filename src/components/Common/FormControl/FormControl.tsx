@@ -1,4 +1,4 @@
-import React, { LegacyRef, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { WrappedFieldProps } from 'redux-form'
 import s from './FormControls.module.css'
 export const Input: React.FC<WrappedFieldProps> = ({ input, meta, ...props }) => {
@@ -9,6 +9,7 @@ export const Input: React.FC<WrappedFieldProps> = ({ input, meta, ...props }) =>
       </div>
    )
 }
+
 export const AutoHeightTextarea: React.FC<WrappedFieldProps> = ({ input, ...props }) => {
    const textareaRef = useRef<HTMLTextAreaElement>(null)
    const [currentValue, setCurrentValue] = useState<string>("")

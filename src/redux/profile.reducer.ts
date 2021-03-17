@@ -1,7 +1,7 @@
 import { AppReducerType } from './store';
 import { ThunkAction } from "redux-thunk"
 import { profileApi, ResultCode } from "../api/api"
-import { InfoContactsPhotoType } from "../types/types"
+import { InfoContactsPhotoType } from "./users.reducer"
 
 const getProfileInfoSuccessType = 'GET_PROFILE_INFO_SUCCESS'
 const setProfileImageSuccessType = 'SET_PROFILE_IMAGE_SUCCESS'

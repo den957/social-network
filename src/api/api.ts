@@ -1,5 +1,5 @@
 import { InfoType } from './../redux/profile.reducer';
-import { UsersType } from './../types/types';
+import { UsersType } from './../redux/users.reducer';
 import axios from 'axios'
 
 export enum ResultCode {

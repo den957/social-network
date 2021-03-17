@@ -1,6 +1,5 @@
 import { ThunkAction } from 'redux-thunk'
 import { ResultCode, userApi } from '../api/api'
-import { UsersType } from '../types/types'
 import { AppReducerType } from './store'
 
 const getUsersFollowedSuccessType = "GET_USERS_FOLLOWED__SUCCESS"
@@ -10,6 +9,19 @@ const unfollowUserSuccessType = 'UNFOLLOW_USER_SUCCESS_TYPE'
 const followUserSuccessType = 'FOLLOW_USER_SUCCESS_TYPE'
 const setReadyToggleType = 'SET_READY_TOGGLE'
 const isFetchingUsersType = 'IS_FETCHING_USERS'
+
+export type InfoContactsPhotoType = {
+   small: string | null,
+   large: string | null
+}
+export type UsersType = {
+   id: number,
+   name: string,
+   status: string,
+   photos: InfoContactsPhotoType,
+   followed: boolean
+}
+type InitialStateType = typeof initialState
 
 const initialState = {
    countFollowed: 5, //count of items on one portion in Users component
@@ -23,7 +35,6 @@ const initialState = {
    readyToggle: [] as Array<number>, //array of id users 
    isFetching: false // are we ready to call new request for UsersAll data
 }
-type InitialStateType = typeof initialState
 export type ActionsType = GetUserFollowedSuccessType | GetUserUnfollowedSuccessType | GetOnceUnfollowedSuccessType | UnfollowUserSuccessType | FollowUserSuccessType | SetReadyToggleType | IsFetchingUsersType
 const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {

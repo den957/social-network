@@ -9,6 +9,7 @@ type PropsType = {
    onPageChange: (pageFollowed: number) => void
 }
 const Paginator: React.FC<PropsType> = ({ totalCount, countFollowed, pageFollowed, onPageChange }) => {
+   let [portionNumber, setPortionNumber] = useState<number>(1)
    let pagesCount = Math.ceil(totalCount as number / countFollowed)
    let pages: Array<number> = []
    for (let i = 1; i <= pagesCount; i++) {
@@ -16,13 +17,11 @@ const Paginator: React.FC<PropsType> = ({ totalCount, countFollowed, pageFollowe
    }
    let portionSize = 1
    let portionsCount = Math.ceil(pagesCount / portionSize)
-   let [portionNumber, setPortionNumber] = useState<number>(1)
    let leftPortionPageNumber = ((portionNumber - 1) * portionSize) + 1
    let rightPortionNumber = portionNumber * portionSize
-   pages = pages
-      .filter((el) => {
-         return el >= leftPortionPageNumber && el <= rightPortionNumber
-      })
+   pages = pages.filter((el) => {
+      return el >= leftPortionPageNumber && el <= rightPortionNumber
+   })
    return (
       <div className={s.paginationClassic}>
          <div className={s.paginationClassic__row}>

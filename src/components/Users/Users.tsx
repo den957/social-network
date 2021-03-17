@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import userIcon from '../../assets/images/userIcon.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserMinus } from '@fortawesome/free-solid-svg-icons'
-import { UsersType } from '../../types/types'
+import { UsersType } from '../../redux/users.reducer'
 
 type PropsType = {
    isAuth: boolean,

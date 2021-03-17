@@ -8,20 +8,34 @@ import { connect } from 'react-redux'
 import { initializeTC } from './redux/app.reducer';
 import Preloader from './components/Common/Preloader/Preloader';
 import ModalStatus from './components/modals/ModalStatus/ModalStatus';
-import Header from './components/Header/Header';
+import Header from './components/Header/HeaderContainer';
 import { withSuspense } from './hoc/withSuspense';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { AppReducerType } from './redux/store';
 
 const ProfileContainerLazy = React.lazy(() => { return import('./components/Profile/ProfileContainer') })
 const UsersContainerLazy = React.lazy(() => { return import('./components/Users/UsersContainer') })
 const LoginContainerLazy = React.lazy(() => { return import('./components/Login/Login') })
 const UsersAllContainerLazy = React.lazy(() => { return import('./components/Users/UsersAll/UsersAllContainer') })
 
-export const App = (props) => {
+type PropsType = MapStateToProps & MapDispatchToProps
+type MapDispatchToProps = {
+  initializeTC: () => void
+}
+type MapStateToProps = {
+  initializer: boolean
+}
+type OwnPropsType = {
+  modalStatus: boolean,
+  editModalStatus: (text: boolean) => void
+}
+export const App: React.FC<PropsType> = ({ initializer, initializeTC }) => {
   useEffect(() => {
-    props.initializeTC()
+    initializeTC()
   })
-  const [modalStatus, editModalStatus] = useState(false)
-  if (!props.initializer) {
+  const [modalStatus, editModalStatus] = useState<boolean>(false)
+  if (!initializer) {
     return (
       <div className={s.preloader__AppWrapper}>
         <div className={s.preloader__AppBlock}>
@@ -42,7 +56,7 @@ export const App = (props) => {
                   <Aside />
                 </div>
                 <div className={s.main__content}>
-                  <Route path={'/profile/:userId?'} render={withSuspense(() => { return <ProfileContainerLazy editModalStatus={editModalStatus} modalStatus={modalStatus} /> })} />
+                  <Route path={'/profile/:userId?'} render={withSuspense(() => <ProfileContainerLazy editModalStatus={editModalStatus} />)} />
                   <Route path={'/messages'} render={() => <Messages />} />
                   <Route exact path={'/users'} render={withSuspense(UsersContainerLazy)} />
                   <Route path={'/settings'} render={() => <Settings />} />
@@ -53,17 +67,17 @@ export const App = (props) => {
             </div>
           </div>
         </div>
-        {modalStatus && <ModalStatus modalStatus={modalStatus} editModalStatus={editModalStatus} />}
+        {modalStatus && <ModalStatus editModalStatus={editModalStatus} />}
       </>
     )
   }
 }
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>): MapDispatchToProps => {
   return {
     initializeTC: () => { dispatch(initializeTC()) }
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppReducerType): MapStateToProps => {
   return {
     initializer: state.app.initializer
   }

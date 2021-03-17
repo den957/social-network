@@ -1,15 +1,21 @@
 import React from 'react'
 import s from './LoginForm.module.css'
-import { Field, reduxForm } from "redux-form";
-import { required } from "../../validators/validators";
-import { useState } from "react";
-import { Input } from "../Common/FormControl/FormControl";
+import { Field, InjectedFormProps, reduxForm } from "redux-form"
+import { required } from "../../validators/validators"
+import { useState } from "react"
+import { Input } from "../Common/FormControl/FormControl"
+import { DataFormLoginType } from './Login'
 
-export const LoginForm = (props) => {
-   const [checked, setChecked] = useState(false)
-   const [activeCheckbox, setActiveCheckbox] = useState(`${s.login__checkbox}`)
+type OwnPropsType = {
+   isCaptcha: boolean,
+   urlCaptcha: string | null
+}
+
+export const LoginForm: React.FC<InjectedFormProps<DataFormLoginType, OwnPropsType> & OwnPropsType> = ({ handleSubmit, isCaptcha, urlCaptcha }) => {
+   const [checked, setChecked] = useState<boolean>(false)
+   const [activeCheckbox, setActiveCheckbox] = useState<string>(`${s.login__checkbox}`)
    return (
-      <form className={s.login__form} onSubmit={props.handleSubmit}>
+      <form className={s.login__form} onSubmit={handleSubmit}>
          <div className={s.login__item}><Field className={s.login__input} component={Input} type={'input'} name={'email'} validate={required} /></div>
          <div className={s.login__item}><Field className={s.login__input} component={Input} type={'password'} name={'password'} validate={required} /></div>
          <div className={s.login__item}>
@@ -31,11 +37,11 @@ export const LoginForm = (props) => {
             }
          </div>
          <div>
-            {props.isCaptcha && <img className={s.login__captcha} src={props.urlCaptcha} />}
-            {props.isCaptcha && <div className={s.login__item}><Field className={s.login__input} component={'input'} type={'input'} name={'captcha'} /></div>}
+            {isCaptcha && <img className={s.login__captcha} src={urlCaptcha as string} />}
+            {isCaptcha && <div className={s.login__item}><Field className={s.login__input} component={'input'} type={'input'} name={'captcha'} /></div>}
          </div>
          <button className={s.login__button} type={'submit'}>To come in</button>
       </form>
    )
 }
-export const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm)
+export const LoginReduxForm = reduxForm<DataFormLoginType, OwnPropsType>({ form: 'login' })(LoginForm)

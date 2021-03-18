@@ -21,7 +21,7 @@ export type UsersType = {
    photos: InfoContactsPhotoType,
    followed: boolean
 }
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 const initialState = {
    countFollowed: 5, //count of items on one portion in Users component
@@ -138,12 +138,12 @@ type IsFetchingUsersType = {
    type: typeof isFetchingUsersType,
    bool: boolean
 }
-const getUsersFollowedSuccess = (usersFollowed: Array<UsersType>, totalCount: number, pageFollowed: number, follower: boolean): GetUserFollowedSuccessType => ({ type: getUsersFollowedSuccessType, usersFollowed, totalCount, pageFollowed, follower })
-const getUsersUnfollowedSuccess = (usersUnfollowed: Array<UsersType>, totalCount: number, pageUnfollowed: number, follower: boolean): GetUserUnfollowedSuccessType => ({ type: getUsersUnfollowedSuccessType, usersUnfollowed, totalCount, pageUnfollowed, follower })
-const getOnceUnfollowedSuccess = (): GetOnceUnfollowedSuccessType => ({ type: getOnceUnfollowedSuccessType })
-const unfollowUserSuccess = (userId: number): UnfollowUserSuccessType => ({ type: unfollowUserSuccessType, userId })
-const followUserSuccess = (userId: number): FollowUserSuccessType => ({ type: followUserSuccessType, userId })
-const setReadyToggle = (value: boolean, userId: number): SetReadyToggleType => ({ type: setReadyToggleType, value, userId })
+export const getUsersFollowedSuccess = (usersFollowed: Array<UsersType>, totalCount: number, pageFollowed: number, follower: boolean): GetUserFollowedSuccessType => ({ type: getUsersFollowedSuccessType, usersFollowed, totalCount, pageFollowed, follower })
+export const getUsersUnfollowedSuccess = (usersUnfollowed: Array<UsersType>, totalCount: number, pageUnfollowed: number, follower: boolean): GetUserUnfollowedSuccessType => ({ type: getUsersUnfollowedSuccessType, usersUnfollowed, totalCount, pageUnfollowed, follower })
+export const getOnceUnfollowedSuccess = (): GetOnceUnfollowedSuccessType => ({ type: getOnceUnfollowedSuccessType })
+export const unfollowUserSuccess = (userId: number): UnfollowUserSuccessType => ({ type: unfollowUserSuccessType, userId })
+export const followUserSuccess = (userId: number): FollowUserSuccessType => ({ type: followUserSuccessType, userId })
+export const setReadyToggle = (value: boolean, userId: number): SetReadyToggleType => ({ type: setReadyToggleType, value, userId })
 export const isFetchingUsers = (bool: boolean): IsFetchingUsersType => ({ type: isFetchingUsersType, bool })
 
 type ThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, ActionsType>

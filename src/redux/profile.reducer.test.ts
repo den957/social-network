@@ -1,20 +1,24 @@
-import profileReducer, { addProfilePost, getProfileStatusSuccess, removeProfilePost } from "./profile.reducer"
-let state = {
-   profileMeInfo: null,
-   profileInfo: null,
-   profileImage: null,
-   profileStatus: '',
-   profilePosts: []
-}
+import profileReducer, { addProfilePost, getProfileStatusSuccess, removeProfilePost, InitialStateType } from "./profile.reducer"
+
+let state: InitialStateType
+beforeEach(() => {
+   state = {
+      profileMeInfo: null,
+      profileInfo: null,
+      profileImage: null,
+      profileStatus: '',
+      profilePosts: [{ id: '2431411', date: '12.03.2021', post: 'Hello world' }]
+   }
+})
 it('length of profilePosts should be incremented', () => {
    let action = addProfilePost({ id: '1241411', date: '12.03.2021', post: 'Hello world' })
    // test action 
    let newState = profileReducer(state, action)
    // test expectation
-   expect(newState.profilePosts.length).toBe(1)
+   expect(newState.profilePosts.length).toBe(2)
 })
 it('length of profilePosts should be decremented', () => {
-   let action = removeProfilePost('1241411')
+   let action = removeProfilePost('2431411')
    //test action 
    let newState = profileReducer(state, action)
    //expectation 

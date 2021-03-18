@@ -41,7 +41,7 @@ const initialState = {
    profilePosts: [] as Array<PostType>
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 type ActionsType = GetProfileInfoSuccessType | SetProfileImageSuccessType | GetProfileStatusSuccess | GetProfileMeInfoSuccessType | AddProfilePost | RemoveProfilePost
 const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {

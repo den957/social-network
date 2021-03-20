@@ -32,11 +32,11 @@ const SettingsForm: React.FC<InjectedFormProps<DataContactType>> = ({ handleSubm
                   <div className={s.bodySettings__input}>
                      {!checked
                         ? <label>
-                           <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => { setActiveCheckbox(`${s.bodySettings__checkbox} ${s.bodySettings__checkboxActive}`); setChecked(true); }} className={activeCheckbox}></div>
+                           <div onClick={(): void => { setActiveCheckbox(`${s.bodySettings__checkbox} ${s.bodySettings__checkboxActive}`); setChecked(true); }} className={activeCheckbox}></div>
                            <Field className={s.bodySettings__elCheckbox} component={'input'} type={'checkbox'} name={'married'} checked={checked} />
                         </label>
                         : <label>
-                           <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => { setActiveCheckbox(`${s.bodySettings__checkbox}`); setChecked(false); }} className={activeCheckbox}></div>
+                           <div onClick={(): void => { setActiveCheckbox(`${s.bodySettings__checkbox}`); setChecked(false); }} className={activeCheckbox}></div>
                            <Field className={s.bodySettings__elCheckbox} component={'input'} type={'checkbox'} name={'married'} checked={checked} />
                         </label>
                      }

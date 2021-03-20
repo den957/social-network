@@ -19,7 +19,7 @@ type MapStateToPropsType = {
 }
 type MapDispatchToPropsType = {
    followUserTC: (userId: number) => void,
-   getUsersUnfollowedTC: (count: number, page: number, boolean: boolean) => void,
+   getUsersUnfollowedTC: (count: number, page: number, boolean: boolean, term: string) => void,
    getOnceUnfollowedTC: () => void,
    isFetchingUsers: (bool: boolean) => void,
 }
@@ -36,7 +36,7 @@ const UserAllContainer: React.FC<PropsType> = ({ isFetchingUsers, pageUnfollowed
    }, [])
    useEffect(() => {
       if (isFetching) {
-         getUsersUnfollowedTC(count, page, false)
+         getUsersUnfollowedTC(count, page, false, '')
       }
    }, [isFetching])
    useEffect(() => {
@@ -76,7 +76,7 @@ const mapStateToProps = (state: AppReducerType): MapStateToPropsType => {
 }
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>): MapDispatchToPropsType => {
    return {
-      getUsersUnfollowedTC: (count: number, pageUnfollowed: number, follower: boolean): void => { dispatch(getUsersUnfollowedTC(count, pageUnfollowed, follower)) },
+      getUsersUnfollowedTC: (count: number, pageUnfollowed: number, follower: boolean, term: string): void => { dispatch(getUsersUnfollowedTC(count, pageUnfollowed, follower, term)) },
       isFetchingUsers: (bool: boolean): void => { dispatch(isFetchingUsers(bool)) },
       followUserTC: (userId: number): void => { dispatch(followUserTC(userId)) },
       getOnceUnfollowedTC: (): void => { dispatch(getOnceUnfollowedTC()) }

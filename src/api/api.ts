@@ -59,8 +59,8 @@ type GetUsersResponseType = {
    error: string
 }
 export const userApi = {
-   getUsers(count: number, page: number, follower: boolean) {
-      return instance.get<GetUsersResponseType>(`/users?count=${count}&page=${page}&friend=${follower}`)
+   getUsers(count: number, page: number, follower: boolean, term: string) {
+      return instance.get<GetUsersResponseType>(`/users?count=${count}&page=${page}&friend=${follower}&term=${term}`)
          .then(response => response.data)
    },
    unfollow(userId: number) {

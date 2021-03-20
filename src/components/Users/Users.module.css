@@ -1,10 +1,23 @@
 /*---Users---*/
 .users {
+   width:100%;
+}
+.users__row {
+   display: flex;
+   justify-content: space-between;
+}
+.users__wide {
    background-color: white;
    border-radius: 0.2em;
    width:66%;
    border:1px solid #d3d9de;
    padding-bottom: 1em;
+}
+.users__narrow {
+   background-color: white;
+   border-radius: 0.2em;
+   width:33%;
+   border:1px solid #d3d9de;
 }
 .users__title {
    width:100%;

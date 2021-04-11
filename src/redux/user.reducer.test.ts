@@ -22,7 +22,8 @@ beforeEach(() => {
       totalCount: null,
       isReadyPage: false,
       readyToggle: [],
-      isFetching: false
+      isFetching: false,
+      isUserSelected: false
    }
 })
 

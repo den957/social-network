@@ -7,6 +7,7 @@ import { LoginReduxForm } from "./LoginForm"
 import { AppReducerType } from '../../redux/store'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
+
 export type DataFormLoginType = {
    email: string,
    password: string,
@@ -47,7 +48,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>): MapDi
       logInServerTC: (email: string, password: string, rememberMe: boolean, captcha: string) => { dispatch(logInServerTC(email, password, rememberMe, captcha)) }
    }
 }
-const mapStateToProps = (state: AppReducerType) => {
+const mapStateToProps = (state: AppReducerType): MapStateToProps => {
    return {
       isCaptcha: state.auth.isCaptcha,
       urlCaptcha: state.auth.urlCaptcha,

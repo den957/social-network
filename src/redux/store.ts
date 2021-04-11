@@ -6,12 +6,14 @@ import usersReducer from './users.reducer'
 import profileReducer from './profile.reducer'
 import appReducer from './app.reducer'
 import loginReducer from './login.reducer'
+import messageReducer from './message.reducer'
 
 export const reducers = combineReducers({
    auth: authReducer,
    users: usersReducer,
    profile: profileReducer,
    app: appReducer,
+   dialogs: messageReducer,
    form: formReducer.plugin({
       login: loginReducer
    })

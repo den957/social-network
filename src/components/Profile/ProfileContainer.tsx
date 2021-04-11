@@ -51,7 +51,6 @@ export const ProfileContainer: React.FC<PropsType> = ({ match, history, userId, 
          getProfileStatus(id)
       }
    }, [match.params.userId, profileImage, props.isAuth])
-
    return (
       <>
          {props.isAuth

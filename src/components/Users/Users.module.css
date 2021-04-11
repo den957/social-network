@@ -132,7 +132,7 @@
 .preloader__usersWrapper {
    display: flex;
    height:85vh;
-   width:66%
+   width:100%
 }
 .preloader__usersBlock {
  width:4em;

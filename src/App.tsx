@@ -13,6 +13,7 @@ import { withSuspense } from './hoc/withSuspense';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { AppReducerType } from './redux/store';
+import MessagesPage from './components/Messages/Messages';
 
 const ProfileContainerLazy = React.lazy(() => { return import('./components/Profile/ProfileContainer') })
 const UsersContainerLazy = React.lazy(() => { return import('./components/Users/UsersContainer') })
@@ -57,7 +58,7 @@ export const App: React.FC<PropsType> = ({ initializer, initializeTC }) => {
                 </div>
                 <div className={s.main__content}>
                   <Route path={'/profile/:userId?'} render={withSuspense(() => <ProfileContainerLazy editModalStatus={editModalStatus} />)} />
-                  <Route path={'/messages'} render={() => <Messages />} />
+                  <Route path={'/messages'} render={() => <MessagesPage />} />
                   <Route exact path={'/users'} render={withSuspense(UsersContainerLazy)} />
                   <Route path={'/settings'} render={() => <Settings />} />
                   <Route path={'/login'} render={withSuspense(LoginContainerLazy)} />

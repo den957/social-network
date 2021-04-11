@@ -1,7 +1,7 @@
 import { InfoType } from './../redux/profile.reducer';
 import { UsersType } from './../redux/users.reducer';
 import axios from 'axios'
-
+// http requests
 export enum ResultCode {
    Success = 0,
    Failure = 1
@@ -118,5 +118,68 @@ export const profileApi = {
          }
       })
          .then(response => response.data)
+   }
+}
+
+// ws requests
+
+export type MessageType = {
+   message: string,
+   photo: string,
+   userId: number,
+   userName: string
+}
+export type MessageCallbackType = (message: Array<MessageType>) => void
+export type StatusCallbackType = (message: boolean) => void
+let wsChannel: null | WebSocket
+const subscribers = {
+   'messages': [] as Array<(message: Array<MessageType>) => void>,
+   'status': [] as Array<(status: boolean) => void>,
+}
+const closeHandler = () => {
+   console.log("CLOSE")
+   subscribers.status.forEach(s => s(true))
+   setTimeout(chatApi.createChannel, 7000)
+}
+const messageHandler = (event: MessageEvent) => {
+   console.log("Message")
+   let newMessage = JSON.parse(event.data)
+   console.log(newMessage)
+   subscribers.messages.forEach(m => m(newMessage))
+}
+const openChannel = () => {
+   console.log("OPEN")
+   subscribers.status.forEach(s => s(false))
+}
+const cleanHandler = () => {
+   wsChannel?.removeEventListener('close', closeHandler)
+   wsChannel?.removeEventListener('message', messageHandler)
+   wsChannel?.removeEventListener('open', openChannel)
+}
+export const chatApi = {
+   createChannel() {
+      cleanHandler()
+      wsChannel?.close()
+      wsChannel = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+      wsChannel?.addEventListener('open', openChannel)
+      wsChannel?.addEventListener('message', messageHandler)
+      wsChannel?.addEventListener('close', closeHandler)
+   },
+   removeChannel() {
+      cleanHandler()
+      subscribers.messages = []
+      subscribers.status = []
+      wsChannel?.close()
+   },
+   messageSubscribe(messageCallback: MessageCallbackType) {
+      subscribers.messages.push(messageCallback)
+      this.createChannel()
+   },
+   statusSubscribe(statusCallback: StatusCallbackType) {
+      subscribers.status.push(statusCallback)
+   },
+   setMessage(message: string) {
+      console.log(message)
+      wsChannel?.send(message)
    }
 }
